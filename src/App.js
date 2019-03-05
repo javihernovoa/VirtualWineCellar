@@ -1,22 +1,74 @@
-import React, { Component } from 'react';
+/* 
+  Main class that have the base of the web app. 
+*/
+import React, { Component, Fragment} from 'react';
+import { Link, withRouter } from "react-router-dom";
 import Routes from './Routes';
 import './style/App.css';
-import Header from './components/header';
-import Nav from './components/nav';
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+        isLogged: false,
+    }
+  }
+
+  /* 
+    Function that change the state of isLogged
+  */
+  userIsLogged = (logging) => {
+    this.setState({
+        isLogged: logging,
+    });
+  }
+
+  /* 
+    Function that manage the logout 
+  */
+  handleLogout = async e => {
+    this.userIsLogged(false);
+    this.props.history.push("/login");
+  }
+
   render() {
 
-    return (
-      <div className="App">
+    const childProps = {
+      isLogged: this.state.isLogged,
+      userIsLogged: this.userIsLogged
+    };
 
-      <Header />
-      <Nav />
-      <Routes />
+    return (
+        <div className="app">
+
+        <header> 
+            <h1><Link to="/"> Virtual Wine Cellar </Link></h1>
+        </header>
+
+        <div className="nav">
+
+          {this.state.isLogged ?
+            <nav className="nav_menu"> 
+              <Link to="/login" onClick={e => this.handleLogout(e)}> Logout </Link>
+            </nav> 
+            : 
+            <Fragment>
+              <nav className="nav_menu"> 
+                <Link to="/login"> Login </Link>
+                <Link to="/register"> Register </Link>
+              </nav>  
+            </Fragment>
+            
+          }
+
+        </div>
+
+        <Routes childProps={childProps} />
 
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
