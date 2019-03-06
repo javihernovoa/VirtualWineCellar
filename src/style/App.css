@@ -6,7 +6,7 @@ header {
     display: block;
     float:left;
     width: 100%;
-    background-color: #66a5ad;
+    background-color: #a41e27;
     margin-bottom: 3em;
 }
 
@@ -14,7 +14,7 @@ header a {
     display: block;
     float:left;
     text-decoration: none; 
-    color: #004762;
+    color: #ffffff;
     margin-left: .5em;
     margin-top: .2em;
     font-size: 1.5em;
@@ -40,7 +40,7 @@ header a {
 }
 
 .link:hover {
-    background-color: #c4dfe6;
+    background-color:  rgb(210, 91, 99);
     color: #004762;
     border: inset 1.5px black;
 }
@@ -58,8 +58,8 @@ header a {
 
 .home_info {
     display:block;
-    color: #004762; 
-    background-color: #c4dfe6;
+    color: #ffffff; 
+    background-color: #A41E27;
     border: solid 2px black;
     border-radius: 20px;
     margin: 3em auto;
@@ -81,7 +81,7 @@ header a {
 .data_form {
     display: block;
     border: solid 1px black;
-    background-color: #c4dfe6;
+    background-color: rgb(183, 55, 63);
     border-radius: 30px;
     margin: 0 auto;
     width: 30%;
@@ -90,12 +90,14 @@ header a {
 
 .title_form {
     font-size: 1.8em;
+    color: white;
 }
 
 .label_input {
     display: block;
     margin-top: 1em;
     font-size: 1.5em;
+    color: white;
 }
 
 .form_input {
@@ -127,8 +129,8 @@ header a {
     display: inline;
     border: solid 1px black;
     border-radius: 20px;
-    background-color: #c4dfe6;
-    color: black;
+    background-color: rgb(183, 55, 63);
+    color: white;
     text-decoration: none;
     font-size: 1.5em;
     margin: .5em;
