@@ -29,8 +29,6 @@ class Login extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    this.setState({isLoading: true});
-
     //Testing 
     if(this.state.username === "admin" && this.state.password === "admin"){
       this.props.userIsLogged(true);

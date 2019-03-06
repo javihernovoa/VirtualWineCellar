@@ -16,7 +16,7 @@ class App extends Component {
   }
 
   /* 
-    Function that change the state of isLogged
+    Function that changes the state of isLogged
   */
   userIsLogged = (logging) => {
     this.setState({
@@ -25,7 +25,7 @@ class App extends Component {
   }
 
   /* 
-    Function that manage the logout 
+    Function that manages the logout 
   */
   handleLogout = async (e) => {
     this.userIsLogged(false);
