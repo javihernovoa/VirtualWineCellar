@@ -31,6 +31,7 @@ class Login extends Component {
 
     this.setState({isLoading: true});
 
+    //Testing 
     if(this.state.username === "admin" && this.state.password === "admin"){
       this.props.userIsLogged(true);
       this.props.history.push("/cellar");
@@ -39,26 +40,28 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="login_wrapper"> 
+      <div className="data_form_wrapper"> 
 
-        <form className="login_form">
+        <form className="data_form">
 
+          <h2 className="title_form"> Login </h2>
+
+          <label className="label_input"> Username </label>
           <input 
             className="form_input" 
             type="text" 
             id="username" 
-            placeholder="Username" 
             autoCorrect="off" 
             autoCapitalize="off" 
             spellCheck="off"
             onChange={e => this.onChange(e)}
             value={this.state.username}/>
 
+          <label className="label_input"> Password </label>
           <input 
             className="form_input" 
             type="password" 
             id="password" 
-            placeholder="Password"
             onChange={e => this.onChange(e)}
             value={this.state.password}/>
 
@@ -71,8 +74,13 @@ class Login extends Component {
           
         </form> 
 
-        <p> Do you need an account? <Link to="/register"> Register here </Link> </p>
+        <div className="connect_account">
+          <p> Do you need an account? </p>
 
+          <Link to="/register" className="button_link"> Create an account </Link> 
+
+        </div> 
+        
       </div>
     );
   }

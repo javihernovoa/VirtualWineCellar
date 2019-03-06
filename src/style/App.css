@@ -1,0 +1,137 @@
+.app {
+    font-family: Helvetica, sans-serif;
+}
+
+header {
+    display: block;
+    float:left;
+    width: 100%;
+    background-color: #66a5ad;
+    margin-bottom: 3em;
+}
+
+header a {
+    display: block;
+    float:left;
+    text-decoration: none; 
+    color: #004762;
+    margin-left: .5em;
+    margin-top: .2em;
+    font-size: 1.5em;
+}
+
+.nav_menu {
+    display: block;
+    float: right;
+    margin-right: 1em;
+    margin-bottom: 1em;
+}
+
+.link {
+    display: inline;
+    border: solid 1px black;
+    border-radius: 20px;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    font-size: 1.5em;
+    margin: .5em;
+    padding: .5em;
+}
+
+.link:hover {
+    background-color: #c4dfe6;
+    color: #004762;
+    border: inset 1.5px black;
+}
+
+#home_image {
+    clear:both;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    max-width: 600px;
+}
+
+.home_info {
+    display:block;
+    color: #004762; 
+    background-color: #c4dfe6;
+    border: solid 2px black;
+    border-radius: 20px;
+    margin: 3em auto;
+    padding: 1em 2em;
+    font-size: 1.5em;
+    min-width: 200px;
+    max-width: 600px;
+
+}
+
+.data_form_wrapper {
+    clear: both;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.data_form {
+    display: block;
+    border: solid 1px black;
+    background-color: #c4dfe6;
+    border-radius: 30px;
+    margin: 0 auto;
+    width: 30%;
+    min-width: 300px;
+}
+
+.title_form {
+    font-size: 1.8em;
+}
+
+.label_input {
+    display: block;
+    margin-top: 1em;
+    font-size: 1.5em;
+}
+
+.form_input {
+    display: block;
+    margin: 1em auto;
+    width: 50%;
+    border-radius: 4px;
+}
+
+.button_submit {
+    margin: 1.5em 0em;
+    border: solid 1px black;
+    border-radius: 10px;
+    width: 30%;
+    font-size: 1em;
+
+}
+
+.connect_account {
+    margin-top: 3em;
+}
+
+.connect_account p {
+    font-size: 1.3em;
+    margin-bottom: 1em;
+}
+
+.button_link {
+    display: inline;
+    border: solid 1px black;
+    border-radius: 20px;
+    background-color: #c4dfe6;
+    color: black;
+    text-decoration: none;
+    font-size: 1.5em;
+    margin: .5em;
+    padding: .5em;
+    
+}

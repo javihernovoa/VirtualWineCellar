@@ -11,7 +11,7 @@ class App extends Component {
     super(props)
 
     this.state = {
-        isLogged: false,
+      isLogged: false,
     }
   }
 
@@ -27,7 +27,7 @@ class App extends Component {
   /* 
     Function that manage the logout 
   */
-  handleLogout = async e => {
+  handleLogout = async (e) => {
     this.userIsLogged(false);
     this.props.history.push("/login");
   }
@@ -44,28 +44,24 @@ class App extends Component {
 
         <header> 
             <h1><Link to="/"> Virtual Wine Cellar </Link></h1>
-        </header>
 
-        <div className="nav">
-
-          {this.state.isLogged ?
+            {this.state.isLogged ?
             <nav className="nav_menu"> 
-              <Link to="/login" onClick={e => this.handleLogout(e)}> Logout </Link>
+              <Link to="/login" className="link" onClick={e => this.handleLogout(e)}> Logout </Link>
             </nav> 
             : 
             <Fragment>
               <nav className="nav_menu"> 
-                <Link to="/login"> Login </Link>
-                <Link to="/register"> Register </Link>
+                <Link to="/login" className="link"> Login </Link>
+                <Link to="/register" className="link"> Register </Link>
               </nav>  
             </Fragment>
             
           }
-
-        </div>
+        </header>
 
         <Routes childProps={childProps} />
-
+        
       </div>
     );
   }

@@ -27,40 +27,42 @@ class Register extends Component {
   /* 
     Function that manage the submition 
   */
-  onSubmit = e => {
+  onSubmit = (e) => {
     e.preventDefault();
   }
 
   render() {
     return (
-      <div className="register_wrapper"> 
+      <div className="data_form_wrapper"> 
 
-        <form className="register_form">
+        <form className="data_form">
 
+          <h2 className="title_form"> Register </h2>
+
+          <label className="label_input"> Username </label>
           <input 
             className="form_input" 
             type="text" 
             id="username" 
-            placeholder="Username" 
             autoCorrect="off" 
             autoCapitalize="off" 
             spellCheck="off"
             onChange={e => this.onChange(e)}
             value={this.state.username}/>
 
+          <label className="label_input"> Email </label>
           <input 
             className="form_input" 
             type="email" 
             id="email" 
-            placeholder="Email"
             onChange={e => this.onChange(e)}
             value={this.state.email}/>
-
+          
+          <label className="label_input"> Password </label>
           <input 
             className="form_input" 
             type="password" 
             id="password" 
-            placeholder="Password"
             onChange={e => this.onChange(e)}
             value={this.state.password}/>
 
@@ -73,7 +75,12 @@ class Register extends Component {
           
         </form> 
 
-        <p> Do you have an account? <Link to="/login"> Login here </Link> </p>
+        <div className="connect_account">
+          <p> Do you have an account? </p>
+
+          <Link to="/login" className="button_link"> Login in your account </Link> 
+
+        </div>
 
       </div>
     );
