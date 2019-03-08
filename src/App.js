@@ -13,6 +13,12 @@ class App extends Component {
     this.state = {
       isLogged: false,
     }
+
+    this.user = {
+      username: '',
+      email: '',
+      password: '',
+    }
   }
 
   /* 
@@ -29,6 +35,7 @@ class App extends Component {
   */
   handleLogout = async (e) => {
     this.userIsLogged(false);
+    this.setState({userNew: null});
     this.props.history.push("/login");
   }
 
@@ -36,7 +43,8 @@ class App extends Component {
 
     const childProps = {
       isLogged: this.state.isLogged,
-      userIsLogged: this.userIsLogged
+      userIsLogged: this.userIsLogged,
+      user: this.user,
     };
 
     return (

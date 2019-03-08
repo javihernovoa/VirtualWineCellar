@@ -30,7 +30,7 @@ class Login extends Component {
     e.preventDefault();
 
     //Testing 
-    if(this.state.username === "admin" && this.state.password === "admin"){
+    if(this.state.username === this.props.user.username && this.state.password === this.props.user.password){
       this.props.userIsLogged(true);
       this.props.history.push("/cellar");
     }

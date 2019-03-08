@@ -12,6 +12,7 @@ class Register extends Component {
       username: '',
       email: '',
       password: '',
+      confirm_password: '',
     }
   }
 
@@ -29,6 +30,16 @@ class Register extends Component {
   */
   onSubmit = (e) => {
     e.preventDefault();
+
+    //Testing
+    if(this.state.password === this.state.confirm_password){
+
+    this.props.user.username = this.state.username;
+    this.props.user.email = this.state.email;
+    this.props.user.password = this.state.password;
+
+    this.props.history.push("/login");
+    }
   }
 
   render() {
@@ -65,6 +76,14 @@ class Register extends Component {
             id="password" 
             onChange={e => this.onChange(e)}
             value={this.state.password}/>
+
+          <label className="label_input"> Confirm Password </label>
+          <input 
+            className="form_input" 
+            type="password" 
+            id="confirm_password" 
+            onChange={e => this.onChange(e)}
+            value={this.state.confrim_password}/>
 
           <button 
             className="button_submit" 
