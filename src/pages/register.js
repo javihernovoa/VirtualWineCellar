@@ -48,9 +48,9 @@ class Register extends Component {
 
         <form className="data_form">
 
-          <h2 className="title_form"> Register </h2>
+          <h2 className="title_form">Register</h2>
 
-          <label className="label_input"> Username </label>
+          <label className="label_input">Username</label>
           <input 
             className="form_input" 
             type="text" 
@@ -61,7 +61,7 @@ class Register extends Component {
             onChange={e => this.onChange(e)}
             value={this.state.username}/>
 
-          <label className="label_input"> Email </label>
+          <label className="label_input">Email</label>
           <input 
             className="form_input" 
             type="email" 
@@ -69,7 +69,7 @@ class Register extends Component {
             onChange={e => this.onChange(e)}
             value={this.state.email}/>
           
-          <label className="label_input"> Password </label>
+          <label className="label_input">Password</label>
           <input 
             className="form_input" 
             type="password" 
@@ -77,7 +77,7 @@ class Register extends Component {
             onChange={e => this.onChange(e)}
             value={this.state.password}/>
 
-          <label className="label_input"> Confirm Password </label>
+          <label className="label_input">Confirm Password</label>
           <input 
             className="form_input" 
             type="password" 
@@ -95,9 +95,9 @@ class Register extends Component {
         </form> 
 
         <div className="connect_account">
-          <p> Do you have an account? </p>
+          <p>Do you have an account?</p>
 
-          <Link to="/login" className="button_link"> Login in your account </Link> 
+          <Link to="/login" className="button_link">Login in your account</Link> 
 
         </div>
 
