@@ -1,7 +1,6 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import Register from '../pages/register';
-import {withRouter} from "react-router-dom";
 
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -56,19 +55,33 @@ describe('<Register />', () => {
     });
   });
 
-  describe('<Register /> When input is writen', () => {
+  describe('<Register /> Inputs', () => {
 
-    it('testing props value', () => {
-        const state = {
-            username: '',
-            email: '',
-            password: '',
-            confirm_password: '',
-        },
-        wrapper = shallow(<Register />);
-        expect(wrapper.state('username')).toBe(state.username);
-        expect(wrapper.state('email')).toBe(state.username);
-        expect(wrapper.state('password')).toBe(state.password);
-        expect(wrapper.state('confirm_password')).toBe(state.confirm_password);
+    it('testing simulated values', () => {
+        const wrapper = shallow(<Register />);
+
+        wrapper.find('input').at(0).simulate('change', {target: {value: 'Test'}});
+        wrapper.find('input').at(1).simulate('change', {target: {value: 'test@test.com'}});
+        wrapper.find('input').at(2).simulate('change', {target: {value: 'TestPassword'}});
+        wrapper.find('input').at(3).simulate('change', {target: {value: 'TestPassword'}});
+
+        expect(wrapper.state('username')).toBe('Test');
+        expect(wrapper.state('email')).toBe('test@test.com');
+        expect(wrapper.state('password')).toBe('TestPassword');
+        expect(wrapper.state('confirm_password')).toBe('TestPassword');
+    });
+    
+    it('testing Register button', () => {
+        const wrapper = shallow(<Register />);
+
+        wrapper.find('.button_submit').simulate('click');
+
+        expect(wrapper.state('send_info')).toBe(true);
+    });
+
+    it('testing Login in your account button', () => {
+        const wrapper = shallow(<Register />);
+
+        expect(wrapper.find('Link').prop('to')).toBe('/login');
     });
   });

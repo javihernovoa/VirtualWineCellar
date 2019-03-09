@@ -13,15 +13,34 @@ class Register extends Component {
       email: '',
       password: '',
       confirm_password: '',
+      send_info: false,
     }
   }
 
   /* 
     Function that manage the change of states
   */
-  onChange = (e) => {
+  usernameChange = (e) => {
     this.setState ({
-      [e.target.id]: e.target.value,
+      username: e.target.value,
+    })
+  }
+
+  emailChange = (e) => {
+    this.setState ({
+      email: e.target.value,
+    })
+  }
+
+  passwordChange = (e) => {
+    this.setState ({
+      password: e.target.value,
+    })
+  }
+
+  confirmPasswordChange = (e) => {
+    this.setState ({
+      confirm_password: e.target.value,
     })
   }
 
@@ -29,16 +48,20 @@ class Register extends Component {
     Function that manage the submition 
   */
   onSubmit = (e) => {
-    e.preventDefault();
-
+    this.setState ({
+      send_info: true,
+    })
+    
     //Testing
-    if(this.state.password === this.state.confirm_password){
+    if (!(this.state.username === '' && this.state.email === '' && this.state.password === '' && this.state.confirm_password === '')) {
+      if(this.state.password === this.state.confirm_password){
 
-    this.props.user.username = this.state.username;
-    this.props.user.email = this.state.email;
-    this.props.user.password = this.state.password;
-
-    this.props.history.push("/login");
+        this.props.user.username = this.state.username;
+        this.props.user.email = this.state.email;
+        this.props.user.password = this.state.password;
+  
+        this.props.history.push("/login");
+      }
     }
   }
 
@@ -58,7 +81,7 @@ class Register extends Component {
             autoCorrect="off" 
             autoCapitalize="off" 
             spellCheck="off"
-            onChange={e => this.onChange(e)}
+            onChange={e => this.usernameChange(e)}
             value={this.state.username}/>
 
           <label className="label_input">Email</label>
@@ -66,7 +89,7 @@ class Register extends Component {
             className="form_input" 
             type="email" 
             id="email" 
-            onChange={e => this.onChange(e)}
+            onChange={e => this.emailChange(e)}
             value={this.state.email}/>
           
           <label className="label_input">Password</label>
@@ -74,7 +97,7 @@ class Register extends Component {
             className="form_input" 
             type="password" 
             id="password" 
-            onChange={e => this.onChange(e)}
+            onChange={e => this.passwordChange(e)}
             value={this.state.password}/>
 
           <label className="label_input">Confirm Password</label>
@@ -82,7 +105,7 @@ class Register extends Component {
             className="form_input" 
             type="password" 
             id="confirm_password" 
-            onChange={e => this.onChange(e)}
+            onChange={e => this.confirmPasswordChange(e)}
             value={this.state.confrim_password}/>
 
           <button 

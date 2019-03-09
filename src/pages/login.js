@@ -27,13 +27,14 @@ class Login extends Component {
     Function that manage the submition 
   */
   onSubmit = (e) => {
-    e.preventDefault();
 
     //Testing 
-    if(this.state.username === this.props.user.username && this.state.password === this.props.user.password){
+    if (!(this.state.username === '' && this.state.password === '')) {
+      if(this.state.username === this.props.user.username && this.state.password === this.props.user.password){
       this.props.userIsLogged(true);
       this.props.history.push("/cellar");
-    }
+      }
+  }
   }
 
   render() {
@@ -65,7 +66,7 @@ class Login extends Component {
 
           <button 
             className="button_submit" 
-            type="submit" 
+            type="button" 
             onClick={e => this.onSubmit(e)}>
             Login
           </button>
