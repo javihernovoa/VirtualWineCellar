@@ -6,15 +6,14 @@ header {
     display: block;
     float:left;
     width: 100%;
-    background-color: #a41e27;
-    margin-bottom: 3em;
+    background-color: #ede8e8;
 }
 
 header a {
     display: block;
     float:left;
     text-decoration: none; 
-    color: #ffffff;
+    color: #a41e27;
     margin-left: .5em;
     margin-top: .2em;
     font-size: 1.5em;
@@ -29,10 +28,11 @@ header a {
 
 .link {
     display: inline;
-    border: solid 1px black;
+    border: solid 1px #a41e27;
     border-radius: 20px;
-    background-color: white;
-    color: black;
+    background-color: #a41e27;
+    color: white;
+    box-shadow: 1px 1px 6px black;
     text-decoration: none;
     font-size: 1.5em;
     margin: .5em;
@@ -40,9 +40,9 @@ header a {
 }
 
 .link:hover {
-    background-color:  rgb(210, 91, 99);
-    color: #004762;
-    border: inset 1.5px black;
+    background-color:  #a41e27;
+    color: white;
+    border: inset 2px black;
 }
 
 #home_image {
@@ -52,21 +52,19 @@ header a {
     margin-right: auto;
     width: 100%;
     height: auto;
-    max-height: 400px;
-    max-width: 600px;
+    max-height: 644px;
+    max-width: 1100px;
 }
 
 .home_info {
     display:block;
-    color: #ffffff; 
-    background-color: #A41E27;
-    border: solid 2px black;
-    border-radius: 20px;
+    color: black; 
+    background-color: #ede8e8;
     margin: 3em auto;
     padding: 1em 2em;
     font-size: 1.5em;
     min-width: 200px;
-    max-width: 600px;
+    max-width: 1100px;
 
 }
 
@@ -74,15 +72,14 @@ header a {
     clear: both;
     display: block;
     text-align: center;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
     max-width: 600px;
 }
 
 .data_form {
     display: block;
-    border: solid 1px black;
-    background-color: rgb(183, 55, 63);
-    border-radius: 30px;
+    padding-top: 3em;
     margin: 0 auto;
     width: 30%;
     min-width: 300px;
@@ -90,34 +87,47 @@ header a {
 
 .title_form {
     font-size: 1.8em;
-    color: white;
+    color: #a41e27;
 }
 
 .label_input {
     display: block;
     margin-top: 1em;
     font-size: 1.5em;
-    color: white;
+    color: black;
 }
 
 .form_input {
     display: block;
     margin: 1em auto;
-    width: 50%;
-    border-radius: 4px;
+    width: 80%;
+    height: 30px;
+    border: solid 1px #a41e27;
+    border-radius: 10px;
+    box-shadow: 1px 2px 6px #a41e27;
 }
 
 .button_submit {
     margin: 1.5em 0em;
-    border: solid 1px black;
+    border: solid 1px #a41e27;
+    background-color: #a41e27;
+    color: white;
     border-radius: 10px;
-    width: 30%;
+    box-shadow: 1px 1px 6px black;
+    width: 50%;
+    height: 30px;
     font-size: 1em;
 
 }
 
+.button_submit:hover, .button_link:hover {
+    background-color:  #a41e27;
+    color: white;
+    border: inset 1.5px black;
+}
+
 .connect_account {
-    margin-top: 3em;
+    margin-top: 2em;
 }
 
 .connect_account p {
@@ -126,14 +136,16 @@ header a {
 }
 
 .button_link {
-    display: inline;
-    border: solid 1px black;
+    display: block;
+    border: solid 1px #a41e27;
     border-radius: 20px;
-    background-color: rgb(183, 55, 63);
+    background-color: #a41e27;
     color: white;
+    box-shadow: 1px 1px 6px black;
     text-decoration: none;
-    font-size: 1.5em;
-    margin: .5em;
+    width: 30%;
+    font-size: 1em;
+    margin: 2em auto;
     padding: .5em;
     
 }
