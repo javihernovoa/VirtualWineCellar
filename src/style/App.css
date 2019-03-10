@@ -180,3 +180,32 @@ header a {
     padding: .5em;
     
 }
+
+@media only screen and (max-width: 730px) {
+    header a {
+        display: inline;
+        text-decoration: none; 
+        color: #a41e27;
+        margin-left: .5em;
+        font-size: 1.2em;
+    }
+    .nav_menu {
+        display: block;
+        float:left;
+        margin-left: 2em;
+    }
+
+    .link {
+        display: block;
+        border: solid 1px #a41e27;
+        border-radius: 20px;
+        background-color: #a41e27;
+        color: white;
+        box-shadow: 1px 1px 6px black;
+        text-decoration: none;
+        text-align: center;
+        font-size: 1.5em;
+        margin: .5em 1em;
+        padding: .5em;
+    }
+  }
