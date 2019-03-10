@@ -56,16 +56,47 @@ header a {
     max-width: 1100px;
 }
 
-.home_info {
+.welcome {
     display:block;
     color: black; 
     background-color: #ede8e8;
-    margin: 3em auto;
-    padding: 1em 2em;
-    font-size: 1.5em;
+    padding: 1em 5em;
     min-width: 200px;
-    max-width: 1100px;
+}
 
+.welcome h3 {
+    text-align: center;
+    font-size: 2em;
+}
+
+.welcome p {
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.home_button_link {
+    display: block;
+    border: solid 1px #a41e27;
+    border-radius: 20px;
+    background-color: #a41e27;
+    color: white;
+    box-shadow: 1px 1px 6px black;
+    text-decoration: none;
+    width: 150px;
+    font-size: 1em;
+    margin: 2em auto;
+    padding: .5em;
+    text-align: center;
+    
+}
+
+.feature {
+    display:block;
+    color: black; 
+    background-color: white;
+    min-width: 200px;
+    padding: 1em 5em;
+    text-align: center;
 }
 
 .data_form_wrapper {
