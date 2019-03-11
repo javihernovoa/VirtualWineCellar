@@ -109,7 +109,6 @@ header a {
 
 .data_form_wrapper {
     clear: both;
-    display: block;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
@@ -117,7 +116,6 @@ header a {
 }
 
 .data_form {
-    display: block;
     padding-top: 3em;
     margin: 0 auto;
     width: 30%;
@@ -131,14 +129,14 @@ header a {
 
 .label_input {
     display: block;
-    margin-top: 1em;
+    margin-top: 10%;
     font-size: 1.5em;
     color: black;
 }
 
 .form_input {
     display: block;
-    margin: 1em auto;
+    margin: 5% auto;
     width: 80%;
     height: 30px;
     border: solid 1px #a41e27;
@@ -147,7 +145,7 @@ header a {
 }
 
 .button_submit {
-    margin: 1.5em 0em;
+    margin: 10% 0;
     border: solid 1px #a41e27;
     background-color: #a41e27;
     color: white;
@@ -166,7 +164,7 @@ header a {
 }
 
 .connect_account {
-    margin-top: 2em;
+    margin-top: 8%;
 }
 
 .connect_account p {
@@ -184,8 +182,8 @@ header a {
     text-decoration: none;
     width: 30%;
     font-size: 1em;
-    margin: 2em auto;
-    padding: .5em;
+    margin: 4% auto;
+    padding: 1.5%;
     
 }
 
