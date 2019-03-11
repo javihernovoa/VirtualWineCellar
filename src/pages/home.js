@@ -14,7 +14,7 @@ class Home extends Component {
           <img id="hp_image_1" src={require('../images/home_section1.jpg')} alt="Wine Cellar" width= "100%" height= "auto"/>
         </figure> 
 
-        <article class="welcome"> 
+        <article className="welcome"> 
 
           <h3>Welcome to Virtual Wine Cellar</h3>
 
@@ -25,7 +25,7 @@ class Home extends Component {
         </article>
 
         <article> 
-          <section class="feature_a">
+          <section className="feature_a">
           
             <h3>Features:</h3>
 
@@ -37,7 +37,7 @@ class Home extends Component {
     
           </section>
 
-          <section class="feature_b"> 
+          <section className="feature_b"> 
 
             <h4>Add</h4>
 
@@ -47,7 +47,7 @@ class Home extends Component {
               You just need to fill the blank spaces in the add section.</p>
           </section>
 
-          <section class="feature_a"> 
+          <section className="feature_a"> 
 
             <h4>Edit</h4>
 
@@ -57,7 +57,7 @@ class Home extends Component {
               the specific property that changed.</p>
           </section>
 
-          <section class="feature_b"> 
+          <section className="feature_b"> 
 
             <h4>Delete</h4>
 
@@ -67,7 +67,7 @@ class Home extends Component {
               information and press the "X" button.</p>
           </section>
 
-          <section class="feature_a"> 
+          <section className="feature_a"> 
 
             <h4>Share</h4>
 

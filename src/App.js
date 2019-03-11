@@ -55,13 +55,15 @@ class App extends Component {
 
             {this.state.isLogged ?
             <nav className="nav_header"> 
-              <Link to="/login" className="link" onClick={e => this.handleLogout(e)}> Logout </Link>
+              <Link to="/login" className="link" onClick={e => this.handleLogout(e)}>Logout</Link>
             </nav> 
             : 
             <Fragment>
               <nav className="nav_header"> 
-                <Link to="/login" className="link"> Login </Link>
-                <Link to="/register" className="link"> Register </Link>
+               <Link to="/login" className="link">Login</Link>
+               <Link to="/register" className="link">Register</Link>
+               
+              
               </nav>  
             </Fragment>
             
