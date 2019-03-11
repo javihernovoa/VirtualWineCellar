@@ -9,22 +9,22 @@ configure({ adapter: new Adapter() });
 
 describe('<Home />', () => {
 
-    it('renders Home image', () => {
+    it('Renders Home image', () => {
         const wrapper = shallow(<Home />);
         expect(wrapper.find('#hp_image_1').prop('alt')).toBe("Wine Cellar");
     });
 
-    it('shows welcome', () => {
+    it('Shows welcome', () => {
         const wrapper = shallow(<Home />);
         expect(wrapper.find('.welcome').exists()).toBe(true);
     });
 
-    it('shows feature a', () => {
+    it('Shows feature a', () => {
         const wrapper = shallow(<Home />);
         expect(wrapper.find('.feature_a').exists()).toBe(true);
     });
 
-    it('shows feature b', () => {
+    it('Shows feature b', () => {
         const wrapper = shallow(<Home />);
         expect(wrapper.find('.feature_b').exists()).toBe(true);
     });
