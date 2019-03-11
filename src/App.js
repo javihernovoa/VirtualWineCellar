@@ -51,7 +51,7 @@ class App extends Component {
         <div className="app">
 
         <header> 
-            <h1><Link to="/"> Virtual Wine Cellar </Link></h1>
+            <h1><Link to="/">Virtual Wine Cellar</Link></h1>
 
             {this.state.isLogged ?
             <nav className="nav_menu"> 

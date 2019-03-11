@@ -3,6 +3,8 @@
 */
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+// import AuthenticatedRoute from "/components/AuthenticatedRoute";
+// import UnauthenticatedRoute from "/components/UnauthenticatedRoute";
 
 import AppliedRoute from "./components/appliedRoute";
 import HomePage from "./pages/home";
