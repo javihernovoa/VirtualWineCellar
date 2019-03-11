@@ -54,12 +54,12 @@ class App extends Component {
             <h1><Link to="/">Virtual Wine Cellar</Link></h1>
 
             {this.state.isLogged ?
-            <nav className="nav_menu"> 
+            <nav className="nav_header"> 
               <Link to="/login" className="link" onClick={e => this.handleLogout(e)}> Logout </Link>
             </nav> 
             : 
             <Fragment>
-              <nav className="nav_menu"> 
+              <nav className="nav_header"> 
                 <Link to="/login" className="link"> Login </Link>
                 <Link to="/register" className="link"> Register </Link>
               </nav>  

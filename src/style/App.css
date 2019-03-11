@@ -1,33 +1,32 @@
+/* Css of the general app */
+
 .app {
     font-family: Helvetica, sans-serif;
 }
 
 header {
-    display: block;
-    float:left;
+    float: left;
     width: 100%;
     background-color: #ede8e8;
 }
 
 header a {
-    display: block;
-    float:left;
+    float: left;
     text-decoration: none; 
     color: #a41e27;
-    margin-left: .5em;
-    margin-top: .2em;
-    font-size: 1.5em;
+    margin-left: 1%;
+    margin-bottom: 1%;
+    font-size: 2.5em;
 }
 
-.nav_menu {
-    display: block;
+.nav_header {
     float: right;
-    margin-right: 1em;
-    margin-bottom: 1em;
+    margin-top: .5%;
+    margin-bottom: 1%;
+    margin-right: .5%;
 }
 
 .link {
-    display: inline;
     border: solid 1px #a41e27;
     border-radius: 20px;
     background-color: #a41e27;
@@ -45,32 +44,71 @@ header a {
     border: inset 2px black;
 }
 
-#home_image {
+/* Css of Home Page */
+
+.home_image {
     clear:both;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 100%;
-    height: auto;
-    max-height: 644px;
+    margin-bottom: -4px;
     max-width: 1100px;
 }
 
-.home_info {
+.welcome {
+    color: black; 
+    background-color: #ede8e8;
+    padding: 1em 5em;
+    min-width: 200px;
+}
+
+.welcome h3 {
+    text-align: center;
+    font-size: 2em;
+}
+
+.welcome p {
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.home_button_link {
+    display: block;
+    border: solid 1px #a41e27;
+    border-radius: 20px;
+    background-color: #a41e27;
+    color: white;
+    box-shadow: 1px 1px 6px black;
+    text-decoration: none;
+    width: 150px;
+    font-size: 1em;
+    margin: 2em auto;
+    padding: .5em;
+    text-align: center; 
+}
+
+.feature_a {
+    display:block;
+    color: black; 
+    background-color: white;
+    min-width: 200px;
+    padding: 1em 5em;
+    text-align: center;
+}
+
+.feature_b {
     display:block;
     color: black; 
     background-color: #ede8e8;
-    margin: 3em auto;
-    padding: 1em 2em;
-    font-size: 1.5em;
     min-width: 200px;
-    max-width: 1100px;
-
+    padding: 1em 5em;
+    text-align: center;
 }
+
+/* Css of Login and Register Page */
 
 .data_form_wrapper {
     clear: both;
-    display: block;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
@@ -78,7 +116,6 @@ header a {
 }
 
 .data_form {
-    display: block;
     padding-top: 3em;
     margin: 0 auto;
     width: 30%;
@@ -92,14 +129,14 @@ header a {
 
 .label_input {
     display: block;
-    margin-top: 1em;
+    margin-top: 10%;
     font-size: 1.5em;
     color: black;
 }
 
 .form_input {
     display: block;
-    margin: 1em auto;
+    margin: 5% auto;
     width: 80%;
     height: 30px;
     border: solid 1px #a41e27;
@@ -108,7 +145,7 @@ header a {
 }
 
 .button_submit {
-    margin: 1.5em 0em;
+    margin: 10% 0;
     border: solid 1px #a41e27;
     background-color: #a41e27;
     color: white;
@@ -127,7 +164,7 @@ header a {
 }
 
 .connect_account {
-    margin-top: 2em;
+    margin-top: 8%;
 }
 
 .connect_account p {
@@ -145,7 +182,38 @@ header a {
     text-decoration: none;
     width: 30%;
     font-size: 1em;
-    margin: 2em auto;
-    padding: .5em;
+    margin: 4% auto;
+    padding: 1.5%;
     
 }
+
+/* Css for mobile version */
+
+@media only screen and (max-width: 730px) {
+    header a {
+        display: inline;
+        text-decoration: none; 
+        color: #a41e27;
+        margin-left: .5em;
+        font-size: 1.2em;
+    }
+    .nav_menu {
+        display: block;
+        float:left;
+        margin-left: 2em;
+    }
+
+    .link {
+        display: block;
+        border: solid 1px #a41e27;
+        border-radius: 20px;
+        background-color: #a41e27;
+        color: white;
+        box-shadow: 1px 1px 6px black;
+        text-decoration: none;
+        text-align: center;
+        font-size: 1.5em;
+        margin: .5em 1em;
+        padding: .5em;
+    }
+  }
