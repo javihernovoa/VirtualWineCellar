@@ -8,11 +8,13 @@ class Home extends Component {
   render() {
     return (
 
-      <div className="home"> 
+      <div className="home">
 
-        <img id="home_image" src={require('../images/home_section1.jpg')} alt="Wine Home Page"/>
+        <figure className="home_image"> 
+          <img id="hp_image_1" src={require('../images/home_section1.jpg')} alt="Wine Cellar" width= "100%" height= "auto"/>
+        </figure> 
 
-        <div class="welcome"> 
+        <article class="welcome"> 
 
           <h3>Welcome to Virtual Wine Cellar</h3>
 
@@ -20,21 +22,22 @@ class Home extends Component {
 
           <Link to="/register" className="home_button_link"> START NOW! </Link> 
 
-        </div>
+        </article>
 
-        <div class="feature">
+        <article> 
+          <section class="feature_a">
           
-              <h3>Features:</h3>
+            <h3>Features:</h3>
 
-              <h4>Scan</h4>
+            <h4>Scan</h4>
 
-              <p>Scan through your collection of wines!</p>
+            <p>Scan through your collection of wines!</p>
 
-              <p>You can scan all in one list or one by one with a backward and forward option.</p>
-        
-        </div>
+            <p>You can scan all in one list or one by one with a backward and forward option.</p>
+    
+          </section>
 
-        <div class="feature"> 
+          <section class="feature_b"> 
 
             <h4>Add</h4>
 
@@ -42,9 +45,9 @@ class Home extends Component {
 
             <p>Adding the wine to your collection is simple and easy. 
               You just need to fill the blank spaces in the add section.</p>
-        </div>
+          </section>
 
-        <div class="feature"> 
+          <section class="feature_a"> 
 
             <h4>Edit</h4>
 
@@ -52,9 +55,9 @@ class Home extends Component {
 
             <p>Editing is simple, fast and easy. You just need to modify
               the specific property that changed.</p>
-        </div>
+          </section>
 
-        <div class="feature"> 
+          <section class="feature_b"> 
 
             <h4>Delete</h4>
 
@@ -62,9 +65,9 @@ class Home extends Component {
 
             <p>Deleting a wine is straight foward, just go to the wine
               information and press the "X" button.</p>
-        </div>
+          </section>
 
-        <div class="feature"> 
+          <section class="feature_a"> 
 
             <h4>Share</h4>
 
@@ -72,7 +75,9 @@ class Home extends Component {
 
             <p>With the Share option you can share any wine to another 
               user at any time.</p>
-        </div>
+          </section>
+
+        </article>
 
       </div>
     );
