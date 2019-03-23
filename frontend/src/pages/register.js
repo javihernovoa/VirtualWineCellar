@@ -3,6 +3,7 @@
 */
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import { register } from '../components/userFunctions';
 
 class Register extends Component {
   constructor(props){
@@ -48,21 +49,21 @@ class Register extends Component {
     Function that manage the submition 
   */
   onSubmit = (e) => {
+    e.preventDefault();
+
+    const newUser = {
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password
+    }
+
     this.setState ({
       send_info: true,
     })
-    
-    //Testing
-    if (!(this.state.username === '' && this.state.email === '' && this.state.password === '' && this.state.confirm_password === '')) {
-      if(this.state.password === this.state.confirm_password){
 
-        this.props.user.username = this.state.username;
-        this.props.user.email = this.state.email;
-        this.props.user.password = this.state.password;
-  
-        this.props.history.push("/login");
-      }
-    }
+    register(newUser).then(res => {
+      this.props.history.push('/login')
+    })
   }
 
   render() {
@@ -77,7 +78,7 @@ class Register extends Component {
           <input 
             className="form_input" 
             type="text" 
-            id="username" 
+            name="username" 
             autoCorrect="off" 
             autoCapitalize="off" 
             spellCheck="off"
@@ -88,7 +89,7 @@ class Register extends Component {
           <input 
             className="form_input" 
             type="email" 
-            id="email" 
+            name="email" 
             onChange={e => this.emailChange(e)}
             value={this.state.email}/>
           
@@ -96,7 +97,7 @@ class Register extends Component {
           <input 
             className="form_input" 
             type="password" 
-            id="password" 
+            name="password" 
             onChange={e => this.passwordChange(e)}
             value={this.state.password}/>
 
@@ -104,7 +105,7 @@ class Register extends Component {
           <input 
             className="form_input" 
             type="password" 
-            id="confirm_password" 
+            name="confirm_password" 
             onChange={e => this.confirmPasswordChange(e)}
             value={this.state.confrim_password}/>
 

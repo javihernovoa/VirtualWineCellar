@@ -3,6 +3,7 @@
 */
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import { login } from '../components/userFunctions';
 
 class Login extends Component {
   constructor(props){
@@ -33,16 +34,21 @@ class Login extends Component {
     Function that manage the submition 
   */
   onSubmit = (e) => {
+    e.preventDefault()
+
+    const user = {
+      username: this.state.username,
+      password: this.state.password
+    }
+
     this.setState({
       send_info: true
     })
-    //Testing 
-    if (!(this.state.username === '' && this.state.password === '')) {
-      if(this.state.username === this.props.user.username && this.state.password === this.props.user.password){
+
+    login(user).then(res => {
       this.props.userIsLogged(true);
-      this.props.history.push("/cellar");
-      }
-  }
+      this.props.history.push('/cellar')
+      })
   }
 
   render() {
@@ -57,7 +63,7 @@ class Login extends Component {
           <input 
             className="form_input" 
             type="text" 
-            id="username" 
+            name="username" 
             autoCorrect="off" 
             autoCapitalize="off" 
             spellCheck="off"
@@ -68,7 +74,7 @@ class Login extends Component {
           <input 
             className="form_input" 
             type="password" 
-            id="password" 
+            name="password" 
             onChange={e => this.passwordChange(e)}
             value={this.state.password}/>
 

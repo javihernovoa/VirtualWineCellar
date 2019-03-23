@@ -1,7 +1,7 @@
 from flask import Flask, request, json, jsonify
 from flaskext.mysql import MySQL
 from flask_cors import CORS
-from flask_bcrypt import Bcrypt
+from flask_jwt_extended import JWTManager
 from flask_jwt_extended import create_access_token
 
 app = Flask(__name__)
@@ -13,8 +13,10 @@ app.config['MYSQL_DATABASE_DB'] = 'virtual_wine_cellar'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 
 mysql = MySQL()
-bcrypt = Bcrypt(app)
 mysql.init_app(app)
+jwt = JWTManager(app)
+
+CORS(app)
 
 @app.route("/register", methods = ['POST'])
 def register():
@@ -26,21 +28,14 @@ def register():
     # read the posted values from the UI REST
     username = request.get_json()['username']
     email = request.get_json()['email']
-    password = bcrypt.generate_password_hash(request.get_json()['password']).decode('utf-8')
-    confirm_password = bcrypt.generate_password_hash(request.get_json()['confirm_password']).decode('utf-8')
-
-    # validate the received values 
-    if username and email and password and confirm_password:
-        return json.dumps ({'html' : '<span>All fields good</span>'})
-    else:
-        return json.dumps({'html':'<span>Enter the required fields</span>'})
+    password = request.get_json()['password']
 
     # Generate id 
     cursor.execute("SELECT * from users")
 
     data = cursor.fetchall()
 
-    id = len(data) + 1;
+    id = len(data) + 1
 
     #Save data in the database 
     cursor.execute("INSERT INTO users (id, username, email, password) VALUES ('" +
@@ -74,20 +69,19 @@ def login():
     # Result variable
     result = ""
 
-    # validate the received values 
-
-    if username  and password:
-        return json.dumps ({'html' : '<span>All fields good</span>'})
-    else:
-        return json.dumps({'html':'<span>Enter the required fields</span>'})
-
     #Get data from the database 
     cursor.execute("SELECT * FROM users where username = '" + str(username) + "'")
     data = cursor.fetchone()
 
-    if bcrypt.check_password_hash(data['password'], password):
-        access_token = create_access_token(identity = {'id': data['id'],'username': data['username'],'email': data['email']})
-        result = access_token
+    if password is data[3]:
+
+        result = {
+        'id' : data[0],
+        'username' : data[1],
+        'email' : data[2],
+        'password' : data[3]
+    }
+
     else:
         result = jsonify({"error" : "Invalid username and password"})
 

@@ -13,12 +13,6 @@ class App extends Component {
     this.state = {
       isLogged: false,
     }
-
-    this.user = {
-      username: '',
-      email: '',
-      password: '',
-    }
   }
 
   /* 
@@ -34,9 +28,9 @@ class App extends Component {
     Function that manages the logout 
   */
   handleLogout = async (e) => {
+    e.preventDefault();
     this.userIsLogged(false);
-    this.setState({userNew: null});
-    this.props.history.push("/login");
+    this.props.history.push(`/`)
   }
 
   render() {
@@ -44,7 +38,6 @@ class App extends Component {
     const childProps = {
       isLogged: this.state.isLogged,
       userIsLogged: this.userIsLogged,
-      user: this.user,
     };
 
     return (
