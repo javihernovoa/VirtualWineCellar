@@ -16,8 +16,6 @@ mysql = MySQL()
 bcrypt = Bcrypt(app)
 mysql.init_app(app)
 
-CORS(app)
-
 @app.route("/register", methods = ['POST'])
 def register():
 
