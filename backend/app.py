@@ -1,6 +1,7 @@
 from flask import Flask, request, json, jsonify
 from flaskext.mysql import MySQL
 from flask_cors import CORS
+from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 from flask_jwt_extended import create_access_token
 
@@ -11,9 +12,11 @@ app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'mysql'
 app.config['MYSQL_DATABASE_DB'] = 'virtual_wine_cellar'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+app.config['JWT_SECRET_KEY'] = 'secret'
 
 mysql = MySQL()
 mysql.init_app(app)
+bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
 CORS(app)
@@ -28,7 +31,7 @@ def register():
     # read the posted values from the UI REST
     username = request.get_json()['username']
     email = request.get_json()['email']
-    password = request.get_json()['password']
+    password = bcrypt.generate_password_hash(request.get_json()['password']).decode('utf-8')
 
     # Generate id 
     cursor.execute("SELECT * from users")
@@ -73,17 +76,26 @@ def login():
     cursor.execute("SELECT * FROM users where username = '" + str(username) + "'")
     data = cursor.fetchone()
 
-    if password is data[3]:
+    if bcrypt.check_password_hash(data[3], password):
 
-        result = {
-        'id' : data[0],
-        'username' : data[1],
-        'email' : data[2],
-        'password' : data[3]
-    }
+        #id = data[0]
+        #username = data[1]
+
+        #cursor.execute("SELECT * FROM winesUserRelation where userID =" + id + "")
+        #data = cursor.fetchall()
+
+        #for x in data:
+        #    print(x)
+
+        access_token = create_access_token(identity = {
+            'username': data[1],
+            'email': data[2]
+        })
+
+        result = access_token
 
     else:
-        result = jsonify({"error" : "Invalid username and password"})
+        result = jsonify({"error" : "Invalid username or password"})
 
     return result
 

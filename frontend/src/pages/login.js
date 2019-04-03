@@ -46,9 +46,15 @@ class Login extends Component {
     })
 
     login(user).then(res => {
-      this.props.userIsLogged(true);
-      this.props.history.push('/cellar')
-      })
+      console.log(res.error)
+      if(!res.error) {
+        this.props.userIsLogged(true);
+        this.props.history.push('/cellar')
+      }
+      else {
+        
+      }
+    })
   }
 
   render() {
