@@ -2,14 +2,32 @@
   Class that contain the information of the user of the web app. 
 */
 import React, { Component } from 'react';
+import jwt_decode from 'jwt-decode'
 
 class Cellar extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      username: '',
+      email: '',
+    }
+  }
+
+  componentDidMount() {
+    const token = localStorage.usertoken
+    const decoded = jwt_decode(token)
+    this.setState({
+      username: decoded.identity.username,
+      email: decoded.identity.email
+    })
+  }
+
   render() {
     return (
 
       <div className="cellar"> 
 
-        <p> Logged in! </p>
+        <p>Welcome {this.state.username}</p>
         <WineList wines={wines} />
       </div>
       

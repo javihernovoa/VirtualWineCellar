@@ -3,6 +3,7 @@
 */
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import Auth from '../components/Auth';
 
 class Home extends Component {
   render() {
@@ -20,7 +21,9 @@ class Home extends Component {
 
           <p>Virtual Wine Cellar is a web application for people who want to keep a record of their wines in one place.</p>
 
-          <Link to="/register" className="home_button_link"> START NOW! </Link> 
+          {Auth.isUserAuthenticated() !== true &&
+            <Link to="/register" className="home_button_link"> START NOW! </Link>
+          }
 
         </article>
 

@@ -6,19 +6,18 @@ import { Route, Switch } from "react-router-dom";
 // import AuthenticatedRoute from "/components/AuthenticatedRoute";
 // import UnauthenticatedRoute from "/components/UnauthenticatedRoute";
 
-import AppliedRoute from "./components/appliedRoute";
 import HomePage from "./pages/home";
 import LoginPage from "./pages/login";
 import RegisterPage from "./pages/register";
 import CellarPage from "./pages/cellar";
 import NotFound from './components/notFound';
 
-export default ({ childProps }) =>
+export default () =>
 <Switch>
-  <AppliedRoute path="/"          exact component={HomePage} props={childProps} />
-  <AppliedRoute path="/login"     exact component={LoginPage} props={childProps} />
-  <AppliedRoute path="/register"  exact component={RegisterPage} props={childProps} />
-  <AppliedRoute path="/cellar"    exact component={CellarPage} props={childProps} />
+  <Route path="/"          exact component={HomePage} />
+  <Route path="/login"     exact component={LoginPage} />
+  <Route path="/register"  exact component={RegisterPage} />
+  <Route path="/cellar"    exact component={CellarPage} />
   { /* Catch all unmatched routes */ }
   <Route component={NotFound} />
 </Switch>;

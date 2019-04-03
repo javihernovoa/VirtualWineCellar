@@ -49,21 +49,30 @@ class Register extends Component {
     Function that manage the submition 
   */
   onSubmit = (e) => {
-    e.preventDefault();
-
-    const newUser = {
-      username: this.state.username,
-      email: this.state.email,
-      password: this.state.password
-    }
-
     this.setState ({
       send_info: true,
     })
 
-    register(newUser).then(res => {
-      this.props.history.push('/login')
-    })
+    if(this.state.password.length >= 8) {
+      if(this.state.password === this.state.confirm_password) { 
+
+        const newUser = {
+          username: this.state.username,
+          email: this.state.email,
+          password: this.state.password
+        }
+    
+        register(newUser).then(res => {
+          this.props.history.push('/login')
+        })
+      }
+      else {
+        //Show that password and confirm password are not equals
+      }
+    }
+    else {
+      //Show that password doesnt have 8 characters or more
+    }
   }
 
   render() {

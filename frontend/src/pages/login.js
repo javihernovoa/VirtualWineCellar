@@ -34,7 +34,6 @@ class Login extends Component {
     Function that manage the submition 
   */
   onSubmit = (e) => {
-    e.preventDefault()
 
     const user = {
       username: this.state.username,
@@ -46,13 +45,11 @@ class Login extends Component {
     })
 
     login(user).then(res => {
-      console.log(res.error)
       if(!res.error) {
-        this.props.userIsLogged(true);
         this.props.history.push('/cellar')
       }
       else {
-        
+        // Show in screen an error message 
       }
     })
   }
