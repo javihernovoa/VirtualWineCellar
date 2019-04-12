@@ -4,16 +4,16 @@
 import React, { Component } from 'react';
 import jwt_decode from 'jwt-decode';
 import WineList from '../components/winesList';
+import { getWines } from '../components/userFunctions';
 
 class Cellar extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      id: '',
       username: '',
       email: '',
-      info: '',
-      search_option: 'users',
-      sort_option: 'name'
+      info: ''
     }
   }
 
@@ -21,6 +21,7 @@ class Cellar extends Component {
     const token = localStorage.usertoken
     const decoded = jwt_decode(token)
     this.setState({
+      id: decoded.identity.id,
       username: decoded.identity.username,
       email: decoded.identity.email,
     })
@@ -32,28 +33,34 @@ class Cellar extends Component {
     })
   }
 
-  searchOptionChange = (e) => {
-    this.setState ({
-      search_option: e.target.value,
-    })
-  }
-
-  sortOptionChange = (e) => {
-    this.setState ({
-      sort_option: e.target.value,
-    })
-  }
-
   searchOnSubmit = (e) => {
     console.log(this.state)
 
   }
 
+  // getWines(user).then(res => {
+  //   if(!res.error) {
+  //     this.props.history.push('/cellar')
+  //   }
+  //   else {
+  //     // Show in screen an error message 
+  //   }
+  // })
+
+  // getWines(id).then(res => {
+  //   if(!res.error){
+  //     console.log(res.wines)
+  //   }
+  //   else{
+  //     // Show in screen an error message 
+  //   }
+  // })
+
   render() {
     return (
       <div className="cellar"> 
 
-        <p className="welcome_user">Welcome back, <span className="user_name"><b>{this.state.username}</b></span>!</p>
+        <p className="welcome_user">Welcome back, <span className="user_name"><b>{this.state.username} </b></span>!</p>
         <form className="search_form">
             <input 
                 type="search" 
@@ -63,10 +70,6 @@ class Cellar extends Component {
                 size="50"
                 onChange={e => this.searchInfoChange(e)} 
                 value={this.state.info}/>
-            <select className="select_options" onChange={e => this.searchOptionChange(e)} value={this.state.search_option}>
-                <option value='users'>users</option>
-                <option value='wines'>wines</option>
-            </select>
             <button 
             className="option_button_submit" 
             type="button" 
@@ -74,17 +77,6 @@ class Cellar extends Component {
             Go!
           </button>
         </form>
-
-        <div className="sort"> 
-            <p className="sort_title">Sort by: </p>
-            <select className="select_options" onChange={e => this.sortOptionChange(e)} value={this.state.sort_option}>
-                    <option value='name'>Name</option>
-                    <option value='year'>Year</option>
-                    <option value='country'>Country</option>
-                    <option value='grape'>Grape</option>
-                    <option value='alcohol'>Alcohol</option>
-            </select>
-        </div>
     
         <button 
             className="inbox_button" 
@@ -92,7 +84,7 @@ class Cellar extends Component {
             Shared with Me
           </button>
 
-          {<WineList wines={wines} />}
+          <WineList wines={wines} />
       </div>
     );
   }

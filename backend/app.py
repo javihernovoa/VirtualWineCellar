@@ -1,3 +1,5 @@
+
+
 from flask import Flask, request, json, jsonify
 from flaskext.mysql import MySQL
 from flask_cors import CORS
@@ -9,9 +11,11 @@ app = Flask(__name__)
 
 #MySQL configurations
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'mysql'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
+# app.config['MYSQL_DATABASE_PASSWORD'] = 'mysql'
 app.config['MYSQL_DATABASE_DB'] = 'virtual_wine_cellar'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+app.config['MYSQL_DATABASE_PORT'] = 8889
 app.config['JWT_SECRET_KEY'] = 'secret'
 
 mysql = MySQL()
@@ -88,6 +92,7 @@ def login():
         #    print(x)
 
         access_token = create_access_token(identity = {
+            'id': data[0],
             'username': data[1],
             'email': data[2]
         })
@@ -98,6 +103,32 @@ def login():
         result = jsonify({"error" : "Invalid username or password"})
 
     return result
+
+@app.route("/getWines", methods = ['POST'])
+def getWines():
+
+    # Connect database
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    
+    # read the posted values from the UI
+    id = request.get_json()['id']
+
+    #Get data from the database 
+    cursor.execute("SELECT * FROM wineUserRelation where userID = '" + str(id) + "'")
+    data = cursor.fetchall()
+    winesID = []
+    wines = []
+
+    for rows in data:
+        winesID.append(rows[2])
+
+    for wine in winesID:
+        cursor.execute("SELECT * FROM wines where id = '" + str(wine) + "'")
+        data = cursor.fetchone()
+        wines.append(data)
+
+    return json.dumps(wines)
 
 if __name__ == "__main__":
     app.run(debug = True)

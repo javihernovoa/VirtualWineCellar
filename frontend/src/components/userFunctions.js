@@ -1,6 +1,8 @@
 import axios from 'axios'
 import Auth from './Auth';
 
+
+
 export const register = newUser => {
     return axios 
         .post('http://127.0.0.1:5000/register', {
@@ -21,6 +23,19 @@ export const login = user => {
         })
         .then(response => {
             Auth.authenticateUser(response.data)
+            return response.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+export const getWines = id => {
+    return axios
+        .post('http://127.0.0.1:5000/getWines', {
+            id: id
+        })
+        .then(response => {
             return response.data
         })
         .catch(err => {
