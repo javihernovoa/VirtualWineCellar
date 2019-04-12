@@ -2,7 +2,8 @@
   Class that contain the information of the user of the web app. 
 */
 import React, { Component } from 'react';
-import jwt_decode from 'jwt-decode'
+import jwt_decode from 'jwt-decode';
+import WineList from '../components/winesList';
 
 class Cellar extends Component {
   constructor(props) {
@@ -10,6 +11,9 @@ class Cellar extends Component {
     this.state = {
       username: '',
       email: '',
+      info: '',
+      search_option: 'users',
+      sort_option: 'name'
     }
   }
 
@@ -18,19 +22,78 @@ class Cellar extends Component {
     const decoded = jwt_decode(token)
     this.setState({
       username: decoded.identity.username,
-      email: decoded.identity.email
+      email: decoded.identity.email,
     })
+  }
+
+  searchInfoChange = (e) => {
+    this.setState ({
+      info: e.target.value,
+    })
+  }
+
+  searchOptionChange = (e) => {
+    this.setState ({
+      search_option: e.target.value,
+    })
+  }
+
+  sortOptionChange = (e) => {
+    this.setState ({
+      sort_option: e.target.value,
+    })
+  }
+
+  searchOnSubmit = (e) => {
+    console.log(this.state)
+
   }
 
   render() {
     return (
-
       <div className="cellar"> 
 
-        <p>Welcome {this.state.username}</p>
-        <WineList wines={wines} />
+        <p className="welcome_user">Welcome back, <span className="user_name"><b>{this.state.username}</b></span>!</p>
+        <form className="search_form">
+            <input 
+                type="search" 
+                className="search_box" 
+                name="search" 
+                placeholder="Search"
+                size="50"
+                onChange={e => this.searchInfoChange(e)} 
+                value={this.state.info}/>
+            <select className="select_options" onChange={e => this.searchOptionChange(e)} value={this.state.search_option}>
+                <option value='users'>users</option>
+                <option value='wines'>wines</option>
+            </select>
+            <button 
+            className="option_button_submit" 
+            type="button" 
+            onClick={e => this.searchOnSubmit(e)}>
+            Go!
+          </button>
+        </form>
+
+        <div className="sort"> 
+            <p className="sort_title">Sort by: </p>
+            <select className="select_options" onChange={e => this.sortOptionChange(e)} value={this.state.sort_option}>
+                    <option value='name'>Name</option>
+                    <option value='year'>Year</option>
+                    <option value='country'>Country</option>
+                    <option value='grape'>Grape</option>
+                    <option value='alcohol'>Alcohol</option>
+            </select>
+        </div>
+    
+        <button 
+            className="inbox_button" 
+            type="button">
+            Shared with Me
+          </button>
+
+          {<WineList wines={wines} />}
       </div>
-      
     );
   }
 }
@@ -44,42 +107,57 @@ const wines = [
     desc: 'Undurraga is good.',
     grape: 'Cabernet Sauvignon',
     alcohol: 12
+  },
+
+  {
+    id: '2',
+    name: 'Undurraga',
+    year: '2016',
+    country: 'Argentina',
+    desc: 'Undurraga is good.',
+    grape: 'Cabernet Sauvignon',
+    alcohol: 12
+  },
+
+  {
+    id: '3',
+    name: 'Undurraga',
+    year: '2016',
+    country: 'Argentina',
+    desc: 'Undurraga is good.',
+    grape: 'Cabernet Sauvignon',
+    alcohol: 12
+  },
+
+  {
+    id: '4',
+    name: 'Undurraga',
+    year: '2016',
+    country: 'Argentina',
+    desc: 'Undurraga is good.',
+    grape: 'Cabernet Sauvignon',
+    alcohol: 12
+  },
+
+  {
+    id: '5',
+    name: 'Undurraga',
+    year: '2016',
+    country: 'Argentina',
+    desc: 'Undurraga is good.',
+    grape: 'Cabernet Sauvignon',
+    alcohol: 12
+  },
+
+  {
+    id: '6',
+    name: 'Undurraga',
+    year: '2016',
+    country: 'Argentina',
+    desc: 'Undurraga is good.',
+    grape: 'Cabernet Sauvignon',
+    alcohol: 12
   }
 ];
-
-// Create a 'Wine' component that renders a wine card
-const Wine = (props) => {
-  return (
-  <div className="card">
-    <div>
-      <img src={require('../images/wines/wine_' + props.id + '.jpg')} alt={props.name} width= "100%" height= "auto"/>
-    </div>
-    <h2>{ props.name }</h2>
-    <p>{ props.desc }</p>
-    <h3>Wine Profile</h3>
-    <ul>
-      <li><strong>Year:</strong> { props.year }</li>
-      <li><strong>Country:</strong> { props.country }</li>
-      <li><strong>Grape:</strong> { props.grape }</li>
-      <li><strong>Alcohol:</strong> { props.alcohol }</li>
-    </ul>
-  </div>
-  );
-}
-
-// Create a container component that iterates over the wine array 
-//    and renders a 'Wine' component for each object in the array 
-const WineList = (props) => {
-  return (
-    <div className="container">
-      {props.wines.map( wine => 
-        <Wine
-          {...wine}
-          key={wine.id}
-        />      
-      )}
-    </div>
-  );
-}
 
 export default Cellar;

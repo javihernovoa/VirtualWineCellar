@@ -5,28 +5,33 @@
 }
 
 header {
-    float: left;
+    float:left;
     width: 100%;
     background-color: #ede8e8;
 }
 
-header a {
+header h1 {
     float: left;
-    text-decoration: none; 
-    color: #a41e27;
+    width: 60%;
     margin-left: 1%;
     margin-bottom: 1%;
-    font-size: 2.5em;
+}
+
+header h1 a {
+    text-decoration: none; 
+    color: #a41e27;
+    font-size: 2em;
 }
 
 .nav_header {
     float: right;
-    margin-top: .5%;
+    width: 30%;
+    margin-top: 1%;
     margin-bottom: 1%;
-    margin-right: .5%;
 }
 
-.link {
+.nav_header .link {
+    float: right;
     border: solid 1px #a41e27;
     border-radius: 20px;
     background-color: #a41e27;
@@ -34,11 +39,11 @@ header a {
     box-shadow: 1px 1px 6px black;
     text-decoration: none;
     font-size: 1.5em;
-    margin: .5em;
+    margin: 0% 4%;
     padding: .5em;
 }
 
-.link:hover {
+.nav_header .link:hover {
     background-color:  #a41e27;
     color: white;
     border: inset 2px black;
@@ -108,7 +113,6 @@ header a {
 /* Css of Login and Register Page */
 
 .data_form_wrapper {
-    clear: both;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
@@ -187,38 +191,86 @@ header a {
     
 }
 
-/* Css for mobile version */
+/* Css for Cellar Page */
+.welcome_user {
+    float: left;
+    margin-right: 5%;
+    margin-left: 1%;
+    margin-top: 2.5%;
+    font-size: 1.3em;
+}
 
-@media only screen and (max-width: 730px) {
-    header a {
-        display: inline;
-        text-decoration: none; 
-        color: #a41e27;
-        margin-left: .5em;
-        font-size: 1.2em;
-    }
-    .nav_menu {
-        display: block;
-        float:left;
-        margin-left: 2em;
-    }
+.user_name {
+    font-style: italic;
+}
 
-    .link {
-        display: block;
-        border: solid 1px #a41e27;
-        border-radius: 20px;
-        background-color: #a41e27;
-        color: white;
-        box-shadow: 1px 1px 6px black;
-        text-decoration: none;
-        text-align: center;
-        font-size: 1.5em;
-        margin: .5em 1em;
-        padding: .5em;
-    }
-  }
+.search_form {
+    float:left;
+    margin: 2% 1%;
+    width: 30%;
+    min-width: 600px;
+}
 
-  .container {
+.search_box {
+    height: 30px;
+    border: solid 1px #a41e27;
+    border-radius: 10px;
+    box-shadow: 1px 2px 6px #a41e27;
+    margin-right: 1%;
+}
+
+.select_options {
+    height: 30px;
+    border: solid 1px #a41e27;
+    border-radius: 10px;
+    box-shadow: 1px 2px 6px #a41e27;
+    margin-right: 2%;
+}
+
+.option_button_submit {
+    border: solid 1px #a41e27;
+    border-radius: 20px;
+    background-color: #a41e27;
+    color: white;
+    box-shadow: 1px 1px 6px black;
+    font-size: 1em;
+    padding: 1.5%;
+}
+
+.sort {
+    display: block;
+    float: left;
+    margin: 2% 1%;
+    width: 15%;
+}
+
+.sort .sort_title {
+    float: left;
+}
+.sort .select_options {
+    float: left;
+    margin: 3% 2% 2% 3%;
+}
+
+.inbox_button {
+    float: left;
+    margin: 2% 1%;
+    border: solid 1px #a41e27;
+    border-radius: 20px;
+    background-color: #a41e27;
+    color: white;
+    box-shadow: 1px 1px 6px black;
+    font-size: 1em;
+    padding: 1.2%;
+}
+
+.option_button_submit:hover, .inbox_button:hover {
+    background-color:  #a41e27;
+    color: white;
+    border: inset 1.5px black;
+}
+
+.container {
     width: 90%;
     max-width: 1100px;
     margin: 1.1em auto;
@@ -235,3 +287,49 @@ header a {
     border-radius: 5px;
     box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
   }
+
+/* Css for mobile version */
+
+@media only screen and (max-width: 960px) {
+    header {
+        float:left;
+        width: 100%;
+        background-color: #ede8e8;
+    }
+    
+    header h1 {
+        width: 99%;
+        text-align: center;
+    }
+    
+    header h1 a {
+        text-decoration: none; 
+        color: #a41e27;
+        font-size: 1.4em;
+    }
+    
+    .nav_header {
+        width: 99%;
+    }
+
+    .nav_header p {
+        float: right;
+        display: block;
+        width: 110px;
+        margin: 20px 50px 20px 50px;
+    }
+    
+    .nav_header a {
+        border: solid 1px #a41e27;
+        border-radius: 20px;
+        background-color: #a41e27;
+        color: white;
+        box-shadow: 1px 1px 6px black;
+        text-decoration: none;
+        font-size: 1.5em;
+        padding: .5em;
+
+    }    
+  }
+
+
