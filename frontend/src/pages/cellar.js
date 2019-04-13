@@ -13,6 +13,7 @@ class Cellar extends Component {
       id: '',
       username: '',
       email: '',
+      wines: [],
       info: ''
     }
   }
@@ -24,6 +25,15 @@ class Cellar extends Component {
       id: decoded.identity.id,
       username: decoded.identity.username,
       email: decoded.identity.email,
+    })
+      
+    getWines(decoded.identity.id).then(res => {
+      if(!res.error){
+        this.setState({wines: res})
+      }
+      else {
+        // Show in screen an error message 
+      }
     })
   }
 
@@ -38,29 +48,11 @@ class Cellar extends Component {
 
   }
 
-  // getWines(user).then(res => {
-  //   if(!res.error) {
-  //     this.props.history.push('/cellar')
-  //   }
-  //   else {
-  //     // Show in screen an error message 
-  //   }
-  // })
-
-  // getWines(id).then(res => {
-  //   if(!res.error){
-  //     console.log(res.wines)
-  //   }
-  //   else{
-  //     // Show in screen an error message 
-  //   }
-  // })
-
-  render() {
+  render() {  
     return (
       <div className="cellar"> 
 
-        <p className="welcome_user">Welcome back, <span className="user_name"><b>{this.state.username} </b></span>!</p>
+        <p className="welcome_user">Welcome back, <span className="user_name"><b>{this.state.username}</b></span>!</p>
         <form className="search_form">
             <input 
                 type="search" 
@@ -82,74 +74,12 @@ class Cellar extends Component {
             className="inbox_button" 
             type="button">
             Shared with Me
-          </button>
+        </button>
 
-          <WineList wines={wines} />
+        <WineList wines={this.state.wines} />
       </div>
     );
   }
 }
-
-const wines = [
-  {
-    id: '1',
-    name: 'Undurraga',
-    year: '2016',
-    country: 'Argentina',
-    desc: 'Undurraga is good.',
-    grape: 'Cabernet Sauvignon',
-    alcohol: 12
-  },
-
-  {
-    id: '2',
-    name: 'Undurraga',
-    year: '2016',
-    country: 'Argentina',
-    desc: 'Undurraga is good.',
-    grape: 'Cabernet Sauvignon',
-    alcohol: 12
-  },
-
-  {
-    id: '3',
-    name: 'Undurraga',
-    year: '2016',
-    country: 'Argentina',
-    desc: 'Undurraga is good.',
-    grape: 'Cabernet Sauvignon',
-    alcohol: 12
-  },
-
-  {
-    id: '4',
-    name: 'Undurraga',
-    year: '2016',
-    country: 'Argentina',
-    desc: 'Undurraga is good.',
-    grape: 'Cabernet Sauvignon',
-    alcohol: 12
-  },
-
-  {
-    id: '5',
-    name: 'Undurraga',
-    year: '2016',
-    country: 'Argentina',
-    desc: 'Undurraga is good.',
-    grape: 'Cabernet Sauvignon',
-    alcohol: 12
-  },
-
-  {
-    id: '6',
-    name: 'Undurraga',
-    year: '2016',
-    country: 'Argentina',
-    desc: 'Undurraga is good.',
-    grape: 'Cabernet Sauvignon',
-    alcohol: 12
-  }
-];
 
 export default Cellar;

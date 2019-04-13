@@ -5,16 +5,15 @@ import React from 'react';
     return (
     <div className="card">
       <div>
-        <img src={require('../images/wines/wine_' + props.id + '.jpg')} alt={props.name} width= "100%" height= "auto"/>
+        <img src={require('../images/wines/wine_' + props[0] + '.jpg')} alt={props[1]} width= "100%" height= "auto"/>
       </div>
-      <h2>{ props.name }</h2>
-      <p>{ props.desc }</p>
+      <h2>{ props[1] }</h2>
       <h3>Wine Profile</h3>
       <ul>
-        <li><strong>Year:</strong> { props.year }</li>
-        <li><strong>Country:</strong> { props.country }</li>
-        <li><strong>Grape:</strong> { props.grape }</li>
-        <li><strong>Alcohol:</strong> { props.alcohol }</li>
+        <li><strong>Year:</strong> { props[2] }</li>
+        <li><strong>Country:</strong> { props[3] }</li>
+        <li><strong>Grape:</strong> { props[4] }</li>
+        <li><strong>Alcohol:</strong> { props[5] }</li>
       </ul>
     </div>
     );
@@ -28,7 +27,7 @@ import React from 'react';
         {props.wines.map( wine => 
           <Wine
             {...wine}
-            key={wine.id}
+            key={wine[0]}
           />      
         )}
       </div>

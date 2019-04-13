@@ -11,11 +11,11 @@ app = Flask(__name__)
 
 #MySQL configurations
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
-# app.config['MYSQL_DATABASE_PASSWORD'] = 'mysql'
+# app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'mysql'
 app.config['MYSQL_DATABASE_DB'] = 'virtual_wine_cellar'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-app.config['MYSQL_DATABASE_PORT'] = 8889
+# app.config['MYSQL_DATABASE_PORT'] = 8889
 app.config['JWT_SECRET_KEY'] = 'secret'
 
 mysql = MySQL()
@@ -81,15 +81,6 @@ def login():
     data = cursor.fetchone()
 
     if bcrypt.check_password_hash(data[3], password):
-
-        #id = data[0]
-        #username = data[1]
-
-        #cursor.execute("SELECT * FROM winesUserRelation where userID =" + id + "")
-        #data = cursor.fetchall()
-
-        #for x in data:
-        #    print(x)
 
         access_token = create_access_token(identity = {
             'id': data[0],
