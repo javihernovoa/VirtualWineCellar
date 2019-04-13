@@ -76,6 +76,7 @@ class Cellar extends Component {
             Shared with Me
         </button>
 
+        {console.log(this.state.wines)}
         <WineList wines={this.state.wines} />
       </div>
     );

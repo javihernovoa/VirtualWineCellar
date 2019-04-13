@@ -5,7 +5,7 @@ import React from 'react';
     return (
     <div className="card">
       <div>
-        <img src={require('../images/wines/wine_' + props[0] + '.jpg')} alt={props[1]} width= "100%" height= "auto"/>
+        <img src={require('../images/wines/' + props[6])} alt={props[1]} width= "100%" height= "auto"/>
       </div>
       <h2>{ props[1] }</h2>
       <h3>Wine Profile</h3>
