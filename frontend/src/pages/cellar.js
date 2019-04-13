@@ -77,7 +77,11 @@ class Cellar extends Component {
         </button>
 
         {console.log(this.state.wines)}
-        <WineList wines={this.state.wines} />
+        {this.state.wines.length === 0 ?
+            <p className="empty_cellar">You do not have any wine in your cellar.</p>
+            : 
+              <WineList wines={this.state.wines} />
+            }
       </div>
     );
   }
