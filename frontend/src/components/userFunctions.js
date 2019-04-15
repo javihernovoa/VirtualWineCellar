@@ -68,6 +68,6 @@ export const editWine = newWine => {
             alcohol: newWine.alcohol
         })
         .then(response => {
-            console.log("Wine Edited")
+            return response.data
         })
 }

@@ -20,7 +20,6 @@ import { editWine } from '../components/userFunctions';
 
     nameChange = (e) => {
       this.setState ({
-        id: this.props[0],
         name: e.target.value,
       })
     }
@@ -75,17 +74,22 @@ import { editWine } from '../components/userFunctions';
       }
 
       editWine(newWine).then(res => {
-        this.setState({edit: false})
+        this.setState({
+          edit: false,
+          name: res.result.name,
+          year: res.result.year,
+          country: res.result.country,
+          grape: res.result.grape,
+          alcohol: res.result.alcohol
+        });
       })
-
-      console.log(newWine)
     }
 
     render () {
     return (
       <div className="card">
         <div>
-          <img src={require('../images/wines/' + this.props[6])} alt={this.props[1]} width= "100%" height= "auto"/>
+          <img src={require('../images/wines/' + this.props[6])} alt={this.state.name} width= "100%" height= "auto"/>
         </div>
 
         {this.state.edit ? 
@@ -95,7 +99,7 @@ import { editWine } from '../components/userFunctions';
               className="form_input" 
               type="text" 
               name="username"
-              placeholder={this.props[1]} 
+              placeholder={this.state.name} 
               onChange={e => this.nameChange(e)}
               value={this.state.name}/>
 
@@ -103,7 +107,7 @@ import { editWine } from '../components/userFunctions';
               className="form_input" 
               type="text" 
               name="username"
-              placeholder={this.props[2]} 
+              placeholder={this.state.year} 
               onChange={e => this.yearChange(e)}
               value={this.state.year}/>
 
@@ -111,7 +115,7 @@ import { editWine } from '../components/userFunctions';
               className="form_input" 
               type="text" 
               name="username"
-              placeholder={this.props[3]} 
+              placeholder={this.state.country} 
               onChange={e => this.countryChange(e)}
               value={this.state.country}/>
 
@@ -119,7 +123,7 @@ import { editWine } from '../components/userFunctions';
               className="form_input" 
               type="text" 
               name="username"
-              placeholder={this.props[4]} 
+              placeholder={this.state.grape} 
               onChange={e => this.grapeChange(e)}
               value={this.state.grape}/>
 
@@ -127,7 +131,7 @@ import { editWine } from '../components/userFunctions';
               className="form_input" 
               type="text" 
               name="username"
-              placeholder={this.props[5]} 
+              placeholder={this.state.alcohol} 
               onChange={e => this.alcoholChange(e)}
               value={this.state.alcohol}/>
 
@@ -143,14 +147,14 @@ import { editWine } from '../components/userFunctions';
         :
           <Fragment>
             <h2>
-            { this.props[1]} 
+            { this.state.name} 
 
             {// Render add button
               this.props.add &&
                 <button 
                 className="add_button" 
                 type="button"
-                onClick={e => this.addOnSubmit(this.props[0], this.props.id)}>
+                onClick={e => this.addOnSubmit(this.state.id, this.props.id)}>
                 Add
                 </button>
             } 
@@ -167,10 +171,10 @@ import { editWine } from '../components/userFunctions';
           </h2>
             <h3>Wine Profile</h3>
             <ul>
-              <li><strong>Year:</strong> { this.props[2] }</li>
-              <li><strong>Country:</strong> { this.props[3] }</li>
-              <li><strong>Grape:</strong> { this.props[4] }</li>
-              <li><strong>Alcohol:</strong> { this.props[5] }</li>
+              <li><strong>Year:</strong> { this.state.year }</li>
+              <li><strong>Country:</strong> { this.state.country }</li>
+              <li><strong>Grape:</strong> { this.state.grape }</li>
+              <li><strong>Alcohol:</strong> { this.state.alcohol }</li>
           </ul>
           </Fragment>
         }
