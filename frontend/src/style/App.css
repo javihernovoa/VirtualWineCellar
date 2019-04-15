@@ -252,6 +252,30 @@ header h1 a {
     margin: 3% 2% 2% 3%;
 }
 
+.add_wine_button {
+    float: left;
+    margin: 2% 2%;
+    border: solid 1px #a41e27;
+    border-radius: 20px;
+    background-color: #a41e27;
+    color: white;
+    box-shadow: 1px 1px 6px black;
+    font-size: 1em;
+    padding: 20px;
+}
+
+.add_button {
+    float: right;
+    margin: 1%;
+    border: solid 1px #a41e27;
+    border-radius: 20px;
+    background-color: #a41e27;
+    color: white;
+    box-shadow: 1px 1px 6px black;
+    font-size: .7em;
+    padding: 15px;
+}
+
 .inbox_button {
     float: left;
     margin: 2% 1%;
@@ -261,10 +285,10 @@ header h1 a {
     color: white;
     box-shadow: 1px 1px 6px black;
     font-size: 1em;
-    padding: 1.2%;
+    padding: 20px;
 }
 
-.option_button_submit:hover, .inbox_button:hover {
+.option_button_submit:hover, .inbox_button:hover, .add_wine_button:hover, .add_button:hover {
     background-color:  #a41e27;
     color: white;
     border: inset 1.5px black;

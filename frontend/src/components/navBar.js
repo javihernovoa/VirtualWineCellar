@@ -5,6 +5,7 @@ import React, { Component, Fragment} from 'react';
 import { Link, withRouter } from "react-router-dom";
 import '../style/App.css';
 import Auth from './Auth';
+import Cellar from '../pages/cellar';
 
 class navBar extends Component {
   /* 
@@ -26,7 +27,7 @@ class navBar extends Component {
             {Auth.isUserAuthenticated() ?
             <nav className="nav_header"> 
               <p><Link to="/login" className="link" onClick={e => this.handleLogout(e)}>Logout</Link></p>
-              <p><Link to="/cellar" className="link">Cellar</Link></p>
+              <p><Link to="/cellar" className="link"onClick={e => Cellar.cellarOnSubmit(e)}>Cellar</Link></p>
             </nav> 
             : 
             <Fragment>

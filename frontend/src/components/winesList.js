@@ -1,22 +1,182 @@
-import React from 'react';
- 
+import React, { Component, Fragment } from 'react';
+import { addWine } from '../components/userFunctions';
+import { editWine } from '../components/userFunctions';
+
   // Create a 'Wine' component that renders a wine card
-  const Wine = (props) => {
+  class Wine extends Component {
+    constructor(props) {
+      super(props)
+
+      this.state = {
+        edit: false,
+        id: this.props[0],
+        name: this.props[1],
+        year: this.props[2],
+        country: this.props[3],
+        grape: this.props[4],
+        alcohol: this.props[5]
+      }
+    }
+
+    nameChange = (e) => {
+      this.setState ({
+        id: this.props[0],
+        name: e.target.value,
+      })
+    }
+
+    yearChange = (e) => {
+      this.setState ({
+        year: e.target.value,
+      })
+    }
+
+    countryChange = (e) => {
+      this.setState ({
+        country: e.target.value,
+      })
+    }
+
+    grapeChange = (e) => {
+      this.setState ({
+        grape: e.target.value,
+      })
+    }
+
+    alcoholChange = (e) => {
+      this.setState ({
+        alcohol: e.target.value,
+      })
+    }
+ 
+    addOnSubmit(wine, id) {
+      addWine(wine, id).then(res => {
+        if(!res.error){
+          // Show in screen an done message
+        }
+        else {
+          // Show in screen an error message 
+        }
+      })
+    }
+
+    edit() {
+      this.setState({edit: true})
+    }
+
+    editOnSubmit = (e) => {
+      const newWine = {
+        id: this.state.id,
+        name: this.state.name,
+        year: this.state.year,
+        country: this.state.country,
+        grape: this.state.grape,
+        alcohol: this.state.alcohol
+      }
+
+      editWine(newWine).then(res => {
+        this.setState({edit: false})
+      })
+
+      console.log(newWine)
+    }
+
+    render () {
     return (
-    <div className="card">
-      <div>
-        <img src={require('../images/wines/' + props[6])} alt={props[1]} width= "100%" height= "auto"/>
+      <div className="card">
+        <div>
+          <img src={require('../images/wines/' + this.props[6])} alt={this.props[1]} width= "100%" height= "auto"/>
+        </div>
+
+        {this.state.edit ? 
+          <Fragment>
+            <form>
+              <input
+              className="form_input" 
+              type="text" 
+              name="username"
+              placeholder={this.props[1]} 
+              onChange={e => this.nameChange(e)}
+              value={this.state.name}/>
+
+              <input
+              className="form_input" 
+              type="text" 
+              name="username"
+              placeholder={this.props[2]} 
+              onChange={e => this.yearChange(e)}
+              value={this.state.year}/>
+
+              <input
+              className="form_input" 
+              type="text" 
+              name="username"
+              placeholder={this.props[3]} 
+              onChange={e => this.countryChange(e)}
+              value={this.state.country}/>
+
+              <input
+              className="form_input" 
+              type="text" 
+              name="username"
+              placeholder={this.props[4]} 
+              onChange={e => this.grapeChange(e)}
+              value={this.state.grape}/>
+
+              <input
+              className="form_input" 
+              type="text" 
+              name="username"
+              placeholder={this.props[5]} 
+              onChange={e => this.alcoholChange(e)}
+              value={this.state.alcohol}/>
+
+              <button 
+                className="add_button" 
+                type="button"
+                onClick={e => this.editOnSubmit()}>
+                Done
+              </button>
+            </form>
+            
+          </Fragment>
+        :
+          <Fragment>
+            <h2>
+            { this.props[1]} 
+
+            {// Render add button
+              this.props.add &&
+                <button 
+                className="add_button" 
+                type="button"
+                onClick={e => this.addOnSubmit(this.props[0], this.props.id)}>
+                Add
+                </button>
+            } 
+
+            {// Render edit button 
+              this.props.edit &&
+              <button 
+              className="add_button" 
+              type="button"
+              onClick={e => this.edit()}>
+              Edit
+              </button>
+            }
+          </h2>
+            <h3>Wine Profile</h3>
+            <ul>
+              <li><strong>Year:</strong> { this.props[2] }</li>
+              <li><strong>Country:</strong> { this.props[3] }</li>
+              <li><strong>Grape:</strong> { this.props[4] }</li>
+              <li><strong>Alcohol:</strong> { this.props[5] }</li>
+          </ul>
+          </Fragment>
+        }
       </div>
-      <h2>{ props[1] }</h2>
-      <h3>Wine Profile</h3>
-      <ul>
-        <li><strong>Year:</strong> { props[2] }</li>
-        <li><strong>Country:</strong> { props[3] }</li>
-        <li><strong>Grape:</strong> { props[4] }</li>
-        <li><strong>Alcohol:</strong> { props[5] }</li>
-      </ul>
-    </div>
-    );
+      );
+    }
   }
   
   // Create a container component that iterates over the wine array 
@@ -28,7 +188,10 @@ import React from 'react';
           <Wine
             {...wine}
             key={wine[0]}
-          />      
+            add={props.add} 
+            id={props.id}
+            edit={props.edit}
+          />  
         )}
       </div>
     );

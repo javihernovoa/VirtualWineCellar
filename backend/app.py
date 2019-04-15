@@ -121,5 +121,73 @@ def getWines():
 
     return json.dumps(wines)
 
+@app.route("/addWine", methods = ['POST'])
+def addWine():
+
+    # Connect database
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    
+    # read the posted values from the UI
+    wine = request.get_json()['wine']
+    id = request.get_json()['id']
+
+    # Generate id 
+    cursor.execute("SELECT * from wineUserRelation")
+
+    data = cursor.fetchall()
+
+    id_table = len(data) + 1
+
+    #Get data from the database 
+    cursor.execute("INSERT INTO wineUserRelation (id, userID, wineID) VALUES ('" +
+    str(id_table) + "', '" +
+    str(id) + "', '" +
+    str(wine) + "')")
+    
+    conn.commit()
+
+    result = {
+        'id' : id_table,
+        'user' : id,
+        'wine' : wine
+    }
+
+    return jsonify({'result': result})
+
+@app.route("/editWine", methods = ['POST'])
+def editWine():
+
+    # Connect database
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    
+    # read the posted values from the UI REST
+    id = request.get_json()['id']
+    name = request.get_json()['name']
+    year = request.get_json()['year']
+    country = request.get_json()['country']
+    grape = request.get_json()['grape']
+    alcohol = request.get_json()['alcohol']    
+
+    #Save data in the database    
+    cursor.execute("UPDATE wines SET name = '"+ str(name) +"' WHERE id ='"+ str(id) +"'")
+    cursor.execute("UPDATE wines SET year = '"+ str(year) +"' WHERE id ='"+ str(id) +"'")
+    cursor.execute("UPDATE wines SET country = '"+ str(country) +"' WHERE id ='"+ str(id) +"'")
+    cursor.execute("UPDATE wines SET grape = '"+ str(grape) +"' WHERE id ='"+ str(id) +"'")
+    cursor.execute("UPDATE wines SET alcohol = '"+ str(alcohol) +"' WHERE id ='"+ str(id) +"'")
+    conn.commit()
+
+    result = {
+        'id' : id,
+        'name' : name,
+        'year' : year,
+        'country' : country,
+        'grape' : grape,
+        'alcohol': alcohol
+    }
+
+    return jsonify({'result': result})
+
 if __name__ == "__main__":
     app.run(debug = True)

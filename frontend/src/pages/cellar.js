@@ -14,7 +14,9 @@ class Cellar extends Component {
       username: '',
       email: '',
       wines: [],
-      info: ''
+      info: '', 
+      add_component: false,
+      edit: false
     }
   }
 
@@ -35,6 +37,28 @@ class Cellar extends Component {
         // Show in screen an error message 
       }
     })
+
+    if(decoded.identity.id === 1){
+      this.setState({edit: true})
+    }
+  }
+
+  /* 
+    Function to reset states when the button of Cellar in the navigation bar is pressed.
+  */
+  static cellarOnSubmit() {
+    this.setState ({
+      add_component: false
+    });
+
+    getWines(this.state.id).then(res => {
+      if(!res.error){
+        this.setState({wines: res})
+      }
+      else {
+        // Show in screen an error message 
+      }
+    })
   }
 
   searchInfoChange = (e) => {
@@ -44,8 +68,24 @@ class Cellar extends Component {
   }
 
   searchOnSubmit = (e) => {
+    // Search funtion 
     console.log(this.state)
 
+  }
+
+  addOnSubmit = (e) => {
+    this.setState ({
+      add_component: true
+    });
+    
+    getWines(1).then(res => {
+      if(!res.error){
+        this.setState({wines: res})
+      }
+      else {
+        // Show in screen an error message 
+      }
+    })
   }
 
   render() {  
@@ -69,6 +109,15 @@ class Cellar extends Component {
             Go!
           </button>
         </form>
+
+        {this.state.id !== 1 &&
+          <button 
+            className="inbox_button" 
+            type="button"
+            onClick={e => this.addOnSubmit(e)}>
+            Add Wine
+          </button>
+        }
     
         <button 
             className="inbox_button" 
@@ -76,12 +125,13 @@ class Cellar extends Component {
             Shared with Me
         </button>
 
-        {console.log(this.state.wines)}
+        {console.log(this.state)}
+
         {this.state.wines.length === 0 ?
-            <p className="empty_cellar">You do not have any wine in your cellar.</p>
+            <p className="empty_cellar">The Cellar is empty.</p>
             : 
-              <WineList wines={this.state.wines} />
-            }
+            <WineList wines={this.state.wines} add={this.state.add_component} id={this.state.id} edit={this.state.edit}/>
+        }
       </div>
     );
   }

@@ -42,3 +42,32 @@ export const getWines = id => {
             console.log(err)
         })
 }
+
+export const addWine = (wine, id) => {
+    return axios
+        .post('http://127.0.0.1:5000/addWine', {
+            wine: wine,
+            id: id
+        })
+        .then(response => {
+            return response.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+export const editWine = newWine => {
+    return axios 
+        .post('http://127.0.0.1:5000/editWine', {
+            id: newWine.id,
+            name: newWine.name,
+            year: newWine.year,
+            country: newWine.country,
+            grape: newWine.grape,
+            alcohol: newWine.alcohol
+        })
+        .then(response => {
+            console.log("Wine Edited")
+        })
+}
