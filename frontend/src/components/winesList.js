@@ -49,9 +49,10 @@ import { editWine } from '../components/userFunctions';
     }
  
     addOnSubmit(wine, id) {
+      
       addWine(wine, id).then(res => {
         if(!res.error){
-          // Show in screen an done message
+          // Show in screen a done message 
         }
         else {
           // Show in screen an error message 

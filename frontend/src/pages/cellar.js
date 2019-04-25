@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import jwt_decode from 'jwt-decode';
 import WineList from '../components/winesList';
-import { getWines } from '../components/userFunctions';
+import { getWines, getWinesDM, getMasterWines } from '../components/userFunctions';
 
 class Cellar extends Component {
   constructor(props) {
@@ -38,6 +38,15 @@ class Cellar extends Component {
       }
     })
 
+    getWinesDM(decoded.identity.id).then(res => {
+      if(!res.error){
+        this.setState({winesDM: res})
+      }
+      else {
+        // Show in screen an error message 
+      }
+    })
+
     if(decoded.identity.id === 1){
       this.setState({edit: true})
     }
@@ -52,6 +61,21 @@ class Cellar extends Component {
     });
 
     getWines(this.state.id).then(res => {
+      if(!res.error){
+        this.setState({wines: res})
+      }
+      else {
+        // Show in screen an error message 
+      }
+    })
+  }
+
+    sharedOnSubmit() {
+    this.setState ({
+      add_component: false
+    });
+
+    getWinesDM(this.state.id).then(res => {
       if(!res.error){
         this.setState({wines: res})
       }
@@ -78,7 +102,7 @@ class Cellar extends Component {
       add_component: true
     });
     
-    getWines(1).then(res => {
+    getMasterWines(this.state.id).then(res => {
       if(!res.error){
         this.setState({wines: res})
       }
@@ -115,14 +139,15 @@ class Cellar extends Component {
             className="inbox_button" 
             type="button"
             onClick={e => this.addOnSubmit(e)}>
-            Add Wine
+            Master Cellar
           </button>
         }
     
         <button 
             className="inbox_button" 
-            type="button">
-            Shared with Me
+            type="button"
+            onClick={e => this.sharedOnSubmit(e)}>
+            Shared with me
         </button>
 
         {console.log(this.state)}

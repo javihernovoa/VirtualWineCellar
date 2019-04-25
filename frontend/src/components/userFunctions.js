@@ -43,6 +43,32 @@ export const getWines = id => {
         })
 }
 
+export const getWinesDM = id => {
+    return axios
+        .post('http://127.0.0.1:5000/getWinesDM', {
+            id: id
+        })
+        .then(response => {
+            return response.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+export const getMasterWines = id => {
+    return axios
+        .post('http://127.0.0.1:5000/getMasterWines', {
+            id: id
+        })
+        .then(response => {
+            return response.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
 export const addWine = (wine, id) => {
     return axios
         .post('http://127.0.0.1:5000/addWine', {

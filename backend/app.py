@@ -11,11 +11,11 @@ app = Flask(__name__)
 
 #MySQL configurations
 app.config['MYSQL_DATABASE_USER'] = 'root'
-# app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'mysql'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
+# app.config['MYSQL_DATABASE_PASSWORD'] = 'mysql'
 app.config['MYSQL_DATABASE_DB'] = 'virtual_wine_cellar'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-# app.config['MYSQL_DATABASE_PORT'] = 8889
+app.config['MYSQL_DATABASE_PORT'] = 8889
 app.config['JWT_SECRET_KEY'] = 'secret'
 
 mysql = MySQL()
@@ -104,7 +104,7 @@ def getWines():
     
     # read the posted values from the UI
     id = request.get_json()['id']
-
+    
     #Get data from the database 
     cursor.execute("SELECT * FROM wineUserRelation where userID = '" + str(id) + "'")
     data = cursor.fetchall()
@@ -115,6 +115,72 @@ def getWines():
         winesID.append(rows[2])
 
     for wine in winesID:
+        cursor.execute("SELECT * FROM wines where id = '" + str(wine) + "'")
+        data = cursor.fetchone()
+        wines.append(data)
+
+    return json.dumps(wines)
+
+@app.route("/getWinesDM", methods = ['POST'])
+def getWinesDM():
+
+    # Connect database
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    
+    # read the posted values from the UI
+    id = request.get_json()['id']
+
+    #Get data from the database 
+    cursor.execute("SELECT * FROM wineUserRelationDM where userID = '" + str(id) + "'")
+    data = cursor.fetchall()
+    winesID = []
+    wines = []
+
+    for rows in data:
+        winesID.append(rows[2])
+
+    for wine in winesID:
+        cursor.execute("SELECT * FROM wines where id = '" + str(wine) + "'")
+        data = cursor.fetchone()
+        wines.append(data)
+
+    return json.dumps(wines)
+
+@app.route("/getMasterWines", methods = ['POST'])
+def getMasterWines():
+
+    # Connect database
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    
+    # read the posted values from the UI
+    id = request.get_json()['id']
+    
+    #Get data from the database 
+    cursor.execute("SELECT * FROM wineUserRelation where userID = '1'")
+    masterData = cursor.fetchall()
+    userWines = []
+    masterWines = []
+    wines = []
+
+    cursor.execute("SELECT * FROM wineUserRelationDM where userID = '" + str(id) + "'")
+    dmData = cursor.fetchall()
+    cursor.execute("SELECT * FROM wineUserRelation where userID = '" + str(id) + "'")
+    userData = cursor.fetchall()
+
+    for rows in masterData:
+        masterWines.append(rows[2])
+    for rows in dmData:
+        userWines.append(rows[2])
+    for rows in userData:
+        userWines.append(rows[2])
+    
+    for wine in userWines:
+        if masterWines.__contains__(wine):
+            masterWines.remove(wine)
+
+    for wine in masterWines:
         cursor.execute("SELECT * FROM wines where id = '" + str(wine) + "'")
         data = cursor.fetchone()
         wines.append(data)
@@ -133,14 +199,14 @@ def addWine():
     id = request.get_json()['id']
 
     # Generate id 
-    cursor.execute("SELECT * from wineUserRelation")
+    cursor.execute("SELECT * from wineUserRelationDM")
 
     data = cursor.fetchall()
 
     id_table = len(data) + 1
 
     #Get data from the database 
-    cursor.execute("INSERT INTO wineUserRelation (id, userID, wineID) VALUES ('" +
+    cursor.execute("INSERT INTO wineUserRelationDM (id, userID, wineID) VALUES ('" +
     str(id_table) + "', '" +
     str(id) + "', '" +
     str(wine) + "')")
