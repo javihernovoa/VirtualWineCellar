@@ -53,14 +53,7 @@ def register():
 
     conn.commit()
 
-    result = {
-        'id' : id,
-        'username' : username,
-        'email' : email,
-        'password' : password
-    }
-
-    return jsonify({'result': result})
+    return jsonify({'username': username})
 
 @app.route("/login", methods = ['POST'])
 def login():
@@ -148,7 +141,6 @@ def addWine():
     conn.commit()
 
     result = {
-        'id' : id_table,
         'user' : id,
         'wine' : wine
     }
