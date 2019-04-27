@@ -69,13 +69,28 @@ export const getMasterWines = id => {
         })
 }
 
-export const addWine = (wine, id) => {
+export const addWineDM = (wine, id) => {
     return axios
-        .post('http://127.0.0.1:5000/addWine', {
+        .post('http://127.0.0.1:5000/addWineDM', {
             wine: wine,
             id: id
         })
         .then(response => {
+            return response.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+export const addWineCellar = (wine, id) => {
+    return axios
+        .post('http://127.0.0.1:5000/addWineCellar', {
+            wine: wine,
+            id: id
+        })
+        .then(response => {
+            console.log(response.data)
             return response.data
         })
         .catch(err => {

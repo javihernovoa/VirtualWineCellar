@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import { addWine } from '../components/userFunctions';
+import { addWineDM, addWineCellar } from '../components/userFunctions';
 import { editWine } from '../components/userFunctions';
-import { getMasterWines } from '../components/userFunctions';
 
   // Create a 'Wine' component that renders a wine card
   class Wine extends Component {
@@ -49,11 +48,23 @@ import { getMasterWines } from '../components/userFunctions';
       })
     }
  
+    sendOnSubmit(wine, id) {
+      
+      addWineDM(wine, id).then(res => {
+        if(!res.error){
+          this.props.master()
+        }
+        else {
+          // Show in screen an error message 
+        }
+      })
+    }
+
     addOnSubmit(wine, id) {
       
-      addWine(wine, id).then(res => {
+      addWineCellar(wine, id).then(res => {
         if(!res.error){
-          this.props.onClick()
+          this.props.add()
         }
         else {
           // Show in screen an error message 
@@ -152,12 +163,12 @@ import { getMasterWines } from '../components/userFunctions';
             { this.state.name} 
 
             {// Render add button
-              this.props.add &&
+              this.props.send &&
                 <button 
                 className="add_button" 
                 type="button"
-                onClick={e => this.addOnSubmit(this.state.id, this.props.id)}>
-                Add
+                onClick={e => this.sendOnSubmit(this.state.id, this.props.id)}>
+                Send to me
                 </button>
             } 
 
@@ -170,6 +181,17 @@ import { getMasterWines } from '../components/userFunctions';
               Edit
               </button>
             }
+
+            {// Render Add button 
+              this.props.share &&
+              <button 
+              className="add_button" 
+              type="button"
+              onClick={e => this.addOnSubmit(this.state.id, this.props.id)}>
+              Add
+              </button>
+            }
+
           </h2>
             <h3>Wine Profile</h3>
             <ul>
@@ -195,10 +217,12 @@ import { getMasterWines } from '../components/userFunctions';
             {...wine}
             wines = {props.wines}
             key={wine[0]}
-            add={props.add} 
+            send={props.send}
+            share={props.share} 
             id={props.id}
             edit={props.edit}
-            onClick={props.onClick}
+            master={props.master}
+            add={props.add}
           />  
         )}
       </div>

@@ -16,6 +16,7 @@ class Cellar extends Component {
       wines: [],
       info: '', 
       add_component: false,
+      share_component: false,
       edit: false
     }
   }
@@ -56,10 +57,6 @@ class Cellar extends Component {
     Function to reset states when the button of Cellar in the navigation bar is pressed.
   */
   static cellarOnSubmit() {
-    this.setState ({
-      add_component: false
-    });
-
     getWines(this.state.id).then(res => {
       if(!res.error){
         this.setState({wines: res})
@@ -72,7 +69,8 @@ class Cellar extends Component {
 
   internalCellarOnSubmit() {
     this.setState ({
-      add_component: false
+      add_component: false,
+      share_component: false
     });
 
     getWines(this.state.id).then(res => {
@@ -87,7 +85,8 @@ class Cellar extends Component {
 
   sharedOnSubmit() {
     this.setState ({
-      add_component: false
+      add_component: false,
+      share_component: true
     });
 
     getWinesDM(this.state.id).then(res => {
@@ -116,7 +115,8 @@ class Cellar extends Component {
 
   masterOnSubmit = (e) => {
     this.setState ({
-      add_component: true
+      add_component: true,
+      share_component: false
     });
     
     getMasterWines(this.state.id).then(res => {
@@ -181,7 +181,7 @@ class Cellar extends Component {
         {this.state.wines.length === 0 ?
             <p className="empty_cellar">The Cellar is empty.</p>
             : 
-            <WineList wines={this.state.wines} add={this.state.add_component} id={this.state.id} edit={this.state.edit} onClick={e => this.masterOnSubmit(e)}/>
+            <WineList wines={this.state.wines} send={this.state.add_component} share={this.state.share_component} id={this.state.id} edit={this.state.edit} master={e => this.masterOnSubmit(e)} add={e => this.sharedOnSubmit(e)}/>
         }
       </div>
     );

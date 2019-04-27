@@ -180,8 +180,8 @@ def getMasterWines():
 
     return json.dumps(wines)
 
-@app.route("/addWine", methods = ['POST'])
-def addWine():
+@app.route("/addWineDM", methods = ['POST'])
+def addWineDM():
 
     # Connect database
     conn = mysql.connect()
@@ -204,6 +204,42 @@ def addWine():
     str(id) + "', '" +
     str(wine) + "')")
     
+    conn.commit()
+
+    result = {
+        'user' : id,
+        'wine' : wine
+    }
+
+    return jsonify({'result': result})
+
+@app.route("/addWineCellar", methods = ['POST'])
+def addWineCellar():
+
+    # Connect database
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    
+    # read the posted values from the UI
+    wine = request.get_json()['wine']
+    id = request.get_json()['id']
+
+    # Generate id 
+    cursor.execute("SELECT * from wineUserRelation")
+
+    data = cursor.fetchall()
+
+    id_table = len(data) + 1
+
+    #Get data from the database 
+    cursor.execute("INSERT INTO wineUserRelation (id, userID, wineID) VALUES ('" +
+    str(id_table) + "', '" +
+    str(id) + "', '" +
+    str(wine) + "')")
+    
+    conn.commit()
+
+    cursor.execute("DELETE FROM wineUserRelationDM WHERE wineID='"+ str(wine) +"'")
     conn.commit()
 
     result = {

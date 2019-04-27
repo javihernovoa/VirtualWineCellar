@@ -48,8 +48,8 @@ class AppTestCase(unittest.TestCase):
                 rv = self.app.get("/getWine")
                 self.assertEqual(rv.default_status, 200)
 
-        def test_addWine(self):
-                rv = self.app.get("/addWine")
+        def test_addWineDM(self):
+                rv = self.app.get("/addWineDM")
                 self.assertEqual(rv.default_status, 200)
 
         def test_editWine(self):
@@ -87,12 +87,12 @@ class AppTestCase(unittest.TestCase):
                 rv = self.app.post('/getWines', json=data)
                 assert b'Undurraga' in rv.data
 
-        def test_addWine_user(self):
+        def test_addWineDM_user(self):
                 data = {
                         'wine': 99,
                         'id': 1
                 }
-                rv = self.app.post('/addWine', json=data)
+                rv = self.app.post('/addWineDM', json=data)
                 self.assertEqual(rv.json, {"result" : {'user': 1, 'wine': 99}})
 
         def test_editWine_user(self):
