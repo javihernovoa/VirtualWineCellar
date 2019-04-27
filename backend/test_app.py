@@ -29,7 +29,7 @@ class AppTestCase(unittest.TestCase):
                 conn.commit()
 
                 #Delete the wine test
-                cursor.execute("DELETE FROM wineUserRelation WHERE wineID='99'")
+                cursor.execute("DELETE FROM wineUserRelationDM WHERE wineID='99'")
                 conn.commit()
 
         def test_home(self):

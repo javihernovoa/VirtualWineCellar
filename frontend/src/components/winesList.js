@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { addWine } from '../components/userFunctions';
 import { editWine } from '../components/userFunctions';
+import { getMasterWines } from '../components/userFunctions';
 
   // Create a 'Wine' component that renders a wine card
   class Wine extends Component {
@@ -52,7 +53,7 @@ import { editWine } from '../components/userFunctions';
       
       addWine(wine, id).then(res => {
         if(!res.error){
-          // Show in screen a done message 
+          this.props.onClick()
         }
         else {
           // Show in screen an error message 
@@ -192,10 +193,12 @@ import { editWine } from '../components/userFunctions';
         {props.wines.map( wine => 
           <Wine
             {...wine}
+            wines = {props.wines}
             key={wine[0]}
             add={props.add} 
             id={props.id}
             edit={props.edit}
+            onClick={props.onClick}
           />  
         )}
       </div>

@@ -11,11 +11,11 @@ app = Flask(__name__)
 
 #MySQL configurations
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
-# app.config['MYSQL_DATABASE_PASSWORD'] = 'mysql'
+# app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'mysql'
 app.config['MYSQL_DATABASE_DB'] = 'virtual_wine_cellar'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-app.config['MYSQL_DATABASE_PORT'] = 8889
+# app.config['MYSQL_DATABASE_PORT'] = 8889
 app.config['JWT_SECRET_KEY'] = 'secret'
 
 mysql = MySQL()

@@ -8,6 +8,12 @@ import Auth from './Auth';
 import Cellar from '../pages/cellar';
 
 class navBar extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      cellar : true
+    }
+  }
   /* 
     Function that manages the logout 
   */
@@ -17,18 +23,31 @@ class navBar extends Component {
     this.props.history.push('/')
   }
 
+  cellarChange = (e) => {
+    this.setState({
+      cellar: false
+    })
+  }
+
   render() {
     return (
         <div className="navBar">
 
         <header> 
-            <h1><Link to="/">Virtual Wine Cellar</Link></h1>
+            <h1><Link to="/" onClick={e => this.cellarChange(e)}>Virtual Wine Cellar</Link></h1>
 
             {Auth.isUserAuthenticated() ?
-            <nav className="nav_header"> 
-              <p><Link to="/login" className="link" onClick={e => this.handleLogout(e)}>Logout</Link></p>
-              <p><Link to="/cellar" className="link"onClick={e => Cellar.cellarOnSubmit(e)}>Cellar</Link></p>
-            </nav> 
+            <Fragment>
+              <nav className="nav_header"> 
+                <p><Link to="/login" className="link" onClick={e => this.handleLogout(e)}>Logout</Link></p>
+                {this.state.cellar !== true &&
+                  <Fragment>
+                    {this.state.cellar === true}
+                    <p><Link to="/cellar" className="link" onClick={e => Cellar.cellarOnSubmit(e)}>Cellar</Link></p>
+                  </Fragment>
+                }
+              </nav> 
+            </Fragment>
             : 
             <Fragment>
               <nav className="nav_header"> 

@@ -70,14 +70,31 @@ class Cellar extends Component {
     })
   }
 
-    sharedOnSubmit() {
+  internalCellarOnSubmit() {
+    this.setState ({
+      add_component: false
+    });
+
+    getWines(this.state.id).then(res => {
+      if(!res.error){
+        this.setState({wines: res})
+      }
+      else {
+        // Show in screen an error message 
+      }
+    })
+  }
+
+  sharedOnSubmit() {
     this.setState ({
       add_component: false
     });
 
     getWinesDM(this.state.id).then(res => {
       if(!res.error){
-        this.setState({wines: res})
+        this.setState({
+          wines: res
+        })
       }
       else {
         // Show in screen an error message 
@@ -97,14 +114,16 @@ class Cellar extends Component {
 
   }
 
-  addOnSubmit = (e) => {
+  masterOnSubmit = (e) => {
     this.setState ({
       add_component: true
     });
     
     getMasterWines(this.state.id).then(res => {
       if(!res.error){
-        this.setState({wines: res})
+        this.setState({
+          wines: res
+        })
       }
       else {
         // Show in screen an error message 
@@ -134,11 +153,18 @@ class Cellar extends Component {
           </button>
         </form>
 
+        <button 
+            className="inbox_button" 
+            type="button"
+            onClick={e => this.internalCellarOnSubmit(e)}>
+            Cellar
+          </button>
+
         {this.state.id !== 1 &&
           <button 
             className="inbox_button" 
             type="button"
-            onClick={e => this.addOnSubmit(e)}>
+            onClick={e => this.masterOnSubmit(e)}>
             Master Cellar
           </button>
         }
@@ -155,7 +181,7 @@ class Cellar extends Component {
         {this.state.wines.length === 0 ?
             <p className="empty_cellar">The Cellar is empty.</p>
             : 
-            <WineList wines={this.state.wines} add={this.state.add_component} id={this.state.id} edit={this.state.edit}/>
+            <WineList wines={this.state.wines} add={this.state.add_component} id={this.state.id} edit={this.state.edit} onClick={e => this.masterOnSubmit(e)}/>
         }
       </div>
     );
