@@ -302,21 +302,22 @@ header h1 a {
 }
 
 .container {
+    clear: both;
     width: 90%;
-    max-width: 1100px;
-    margin: 1.1em auto;
-    
-    display: grid;
-    grid-gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    margin: 0 auto;
   }
   
   .card {
-    box-sizing: border-box;
+    width: 25%;
+    min-width: 380px;
+    float: left;
     background: white;
+    margin: 20px;
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
+    border-top: 1px solid #a41e27;
+    border-bottom: 1px solid #a41e27;
+    border-radius: 20px;
+    box-shadow: 0 2px 0 #a41e27;
   }
 
 /* Css for mobile version */
