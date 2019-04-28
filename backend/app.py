@@ -249,6 +249,28 @@ def addWineCellar():
 
     return jsonify({'result': result})
 
+@app.route("/removeWineDM", methods = ['POST'])
+def removeWineDM():
+
+    # Connect database
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    
+    # read the posted values from the UI
+    wine = request.get_json()['wine']
+    id = request.get_json()['id']
+
+    # Delete wine from table
+    cursor.execute("DELETE FROM wineUserRelationDM WHERE wineID='"+ str(wine) +"'")
+    conn.commit()
+
+    result = {
+        'user' : id,
+        'wine' : wine
+    }
+
+    return jsonify({'result': result})
+
 @app.route("/editWine", methods = ['POST'])
 def editWine():
 

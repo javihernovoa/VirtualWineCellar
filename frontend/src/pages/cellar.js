@@ -186,7 +186,7 @@ class Cellar extends Component {
         {this.state.wines.length === 0 ?
             <p className="empty_cellar">The Cellar is empty.</p>
             : 
-            <WineList wines={this.state.wines} send={this.state.add_component} share={this.state.share_component} id={this.state.id} edit={this.state.edit} master={e => this.masterOnSubmit(e)} add={e => this.sharedOnSubmit(e)}/>
+            <WineList wines={this.state.wines} send={this.state.add_component} share={this.state.share_component} id={this.state.id} edit={this.state.edit} master={e => this.masterOnSubmit(e)} shared={e => this.sharedOnSubmit(e)}/>
         }
       </div>
     );

@@ -98,6 +98,21 @@ export const addWineCellar = (wine, id) => {
         })
 }
 
+export const removeWineDM = (wine, id) => {
+    return axios
+        .post('http://127.0.0.1:5000/removeWineDM', {
+            wine: wine,
+            id: id
+        })
+        .then(response => {
+            console.log(response.data)
+            return response.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
 export const editWine = newWine => {
     return axios 
         .post('http://127.0.0.1:5000/editWine', {

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { addWineDM, addWineCellar } from '../components/userFunctions';
+import { addWineDM, addWineCellar, removeWineDM } from '../components/userFunctions';
 import { editWine } from '../components/userFunctions';
 
   // Create a 'Wine' component that renders a wine card
@@ -70,7 +70,19 @@ import { editWine } from '../components/userFunctions';
       
       addWineCellar(wine, id).then(res => {
         if(!res.error){
-          this.props.add()
+          this.props.shared()
+        }
+        else {
+          // Show in screen an error message 
+        }
+      })
+    }
+
+    removeOnSubmit(wine, id) {
+      
+      removeWineDM(wine, id).then(res => {
+        if(!res.error){
+          this.props.shared()
         }
         else {
           // Show in screen an error message 
@@ -188,14 +200,22 @@ import { editWine } from '../components/userFunctions';
               </button>
             }
 
-            {// Render Add button 
+            {// Render Add and Delete button 
               this.props.share &&
-              <button 
-              className="add_button" 
-              type="button"
-              onClick={e => this.addOnSubmit(this.state.id, this.props.id)}>
-              Add
-              </button>
+              <Fragment>
+                 <button 
+                  className="add_button" 
+                  type="button"
+                  onClick={e => this.removeOnSubmit(this.state.id, this.props.id)}>
+                  Remove
+                </button>
+                <button 
+                  className="add_button" 
+                  type="button"
+                  onClick={e => this.addOnSubmit(this.state.id, this.props.id)}>
+                  Add
+                </button>
+              </Fragment>
             }
 
           </h2>
@@ -240,7 +260,7 @@ import { editWine } from '../components/userFunctions';
             id={props.id}
             edit={props.edit}
             master={props.master}
-            add={props.add}
+            shared={props.shared}
           />  
         )}
       </div>
