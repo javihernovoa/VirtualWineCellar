@@ -15,10 +15,10 @@ class Cellar extends Component {
       email: '',
       wines: [],
       info: '', 
-      add_component: false,
-      share_component: false,
-      edit: false, 
-      slideshow: true
+      add_component: '',
+      share_component: '',
+      edit: '', 
+      slideshow: ''
     }
   }
 
@@ -29,6 +29,10 @@ class Cellar extends Component {
       id: decoded.identity.id,
       username: decoded.identity.username,
       email: decoded.identity.email,
+      add_component: false,
+      share_component: false,
+      edit: false,
+      slideshow: false
     })
       
     getWines(decoded.identity.id).then(res => {
@@ -86,7 +90,7 @@ class Cellar extends Component {
     this.setState ({
       add_component: false,
       share_component: false,
-      slideshow: true
+      slideshow: false
     });
 
     getWines(this.state.id).then(res => {
