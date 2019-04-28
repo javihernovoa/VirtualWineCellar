@@ -88,6 +88,64 @@ def login():
 
     return result
 
+@app.route("/addWineFriend", methods = ['POST'])
+def adWineFriend():
+
+    # Connect database
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    
+    # read the posted values from the UI
+    username = request.get_json()['username']
+    wine = request.get_json()['wine']
+
+    # Result variable
+    result = ""
+
+    #Get data from the database 
+    cursor.execute("SELECT * FROM users where username = '" + str(username) + "'")
+    data = cursor.fetchone()
+
+    if data != None:
+
+        userWines = []
+        id = data[0]
+
+        cursor.execute("SELECT * FROM wineUserRelationDM where userID = '" + str(id) + "'")
+        dmData = cursor.fetchall()
+        cursor.execute("SELECT * FROM wineUserRelation where userID = '" + str(id) + "'")
+        userData = cursor.fetchall()
+
+        for rows in dmData:
+            userWines.append(rows[2])
+        for rows in userData:
+            userWines.append(rows[2])
+
+        if userWines.__contains__(wine):
+            result = jsonify({"error": "Users already have that wine!"})
+
+        else:
+            # Generate id 
+            cursor.execute("SELECT * from wineUserRelationDM")
+
+            data = cursor.fetchall()
+
+            id_table = len(data) + 1
+
+            #Get data from the database 
+            cursor.execute("INSERT INTO wineUserRelationDM (id, userID, wineID) VALUES ('" +
+            str(id_table) + "', '" +
+            str(id) + "', '" +
+            str(wine) + "')")
+            
+            conn.commit()
+            result = jsonify({"result": "Wine sended!"})
+
+    else:
+        result = jsonify({"error" : "User doesn't exist"})
+
+    return result
+
 @app.route("/getWines", methods = ['POST'])
 def getWines():
 

@@ -69,6 +69,20 @@ export const getMasterWines = id => {
         })
 }
 
+export const addWineFriend = (username, wine) => {
+    return axios
+        .post('http://127.0.0.1:5000/addWineFriend', {
+            username: username,
+            wine: wine
+        })
+        .then(response => {
+            return response.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
 export const addWineDM = (wine, id) => {
     return axios
         .post('http://127.0.0.1:5000/addWineDM', {

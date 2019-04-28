@@ -2,6 +2,8 @@
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Philosopher');
 
 .app {
+    max-width: 1580px;
+    margin: 0px auto;
     font-family: 'Josefin Sans', sans-serif;
     font-size: 1.20em;
 }
@@ -298,6 +300,7 @@ header h1 a {
     clear: both;
     width: 90%;
     margin: 0 auto;
+    background-color: #ffffff;
   }
 
 #left_arrow {
@@ -336,6 +339,27 @@ header h1 a {
     font-size: 1.75em;
     font-family: 'Philosopher', sans-serif;
   }
+
+.form_input_friend {
+    z-index: 1;
+    width: 320px;
+    margin-left: 450px;
+    padding: 10px;
+
+    border-top: 2px solid #a41e27;
+    border-radius: 10px;
+    margin-bottom: -89px;
+}
+
+.form_input_friend .form_input {
+    width: 300px;
+    padding-left: 10px;
+    margin-bottom: 12px;
+}
+
+.form_input_friend .add_button {
+    padding: 5px;
+}
 
 /* Css for mobile version */
 

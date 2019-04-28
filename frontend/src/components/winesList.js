@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { addWineDM, addWineCellar, removeWineDM } from '../components/userFunctions';
+import { addWineDM, addWineCellar, removeWineDM, addWineFriend } from '../components/userFunctions';
 import { editWine } from '../components/userFunctions';
 
   // Create a 'Wine' component that renders a wine card
@@ -9,6 +9,8 @@ import { editWine } from '../components/userFunctions';
 
       this.state = {
         edit: false,
+        userbox: false,
+        friend_username: '',
         id: this.props[0],
         name: this.props[1],
         year: this.props[2],
@@ -50,6 +52,12 @@ import { editWine } from '../components/userFunctions';
         alcohol: e.target.value,
       })
     }
+
+    friendChange = (e) => {
+      this.setState ({
+        friend_username: e.target.value,
+      })
+    }
  
     /* 
       Function that manage the submition 
@@ -86,6 +94,21 @@ import { editWine } from '../components/userFunctions';
         }
         else {
           // Show in screen an error message 
+        }
+      })
+    }
+
+    shareToUser() {
+      this.setState({userbox: true})
+    }
+
+    shareOnSubmit(username, wine) {
+      addWineFriend(username, wine).then(res => {
+        if(!res.error) {
+          console.log(res)
+        }
+        else {
+          console.log(res)
         }
       })
     }
@@ -190,6 +213,38 @@ import { editWine } from '../components/userFunctions';
                 </button>
             } 
 
+            {// Render Share To User Box
+              this.props.slideshow &&
+              <button 
+              className="add_button" 
+              type="button"
+              onClick={e => this.shareToUser(e)}>
+              Share
+              </button>
+            }
+
+            {//Manage data of user's friend
+              this.state.userbox && 
+              <Fragment>
+                <div className="form_input_friend">
+                  <input
+                    className="form_input" 
+                    type="text" 
+                    name="friend_username"
+                    placeholder= "Username of your friend" 
+                    onChange={e => this.friendChange(e)}
+                    value={this.state.friend_username}/>
+
+                  <button 
+                    className="add_button" 
+                    type="button"
+                    onClick={e => this.shareOnSubmit(this.state.friend_username, this.state.id)}>
+                    Send!
+                  </button>
+                </div>
+              </Fragment>
+            }
+
             {// Render Edit button 
               this.props.edit &&
               <button 
@@ -283,6 +338,7 @@ import { editWine } from '../components/userFunctions';
                   edit={this.props.edit}
                   master={this.props.master}
                   shared={this.props.shared}
+                  slideshow={this.props.slideshow}
                 /> 
                 <img id="right_arrow" src={require('../images/right.png')} alt="Right Arrow" width= "auto" height= "auto" onClick={e => this.slideshowFunction(1)}/> 
             </Fragment>
