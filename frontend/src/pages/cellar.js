@@ -1,7 +1,7 @@
 /* 
   Class that contain the information of the user of the web app. 
 */
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import jwt_decode from 'jwt-decode';
 import WineList from '../components/winesList';
 import { getWines, getWinesDM, getMasterWines } from '../components/userFunctions';
@@ -67,6 +67,9 @@ class Cellar extends Component {
     })
   }
 
+  /* 
+    Function that manage the submition 
+  */
   internalCellarOnSubmit() {
     this.setState ({
       add_component: false,
@@ -153,28 +156,30 @@ class Cellar extends Component {
           </button>
         </form>
 
-        <button 
+        {this.state.id !== 1 &&
+        <Fragment>
+          <button 
             className="inbox_button" 
             type="button"
             onClick={e => this.internalCellarOnSubmit(e)}>
-            Cellar
+            My Cellar
           </button>
 
-        {this.state.id !== 1 &&
           <button 
             className="inbox_button" 
             type="button"
             onClick={e => this.masterOnSubmit(e)}>
             Master Cellar
           </button>
-        }
-    
-        <button 
+
+          <button 
             className="inbox_button" 
             type="button"
             onClick={e => this.sharedOnSubmit(e)}>
             Shared with me
-        </button>
+          </button>
+        </Fragment>
+        }
 
         {console.log(this.state)}
 

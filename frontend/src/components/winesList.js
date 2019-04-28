@@ -18,6 +18,9 @@ import { editWine } from '../components/userFunctions';
       }
     }
 
+    /* 
+      Function that manage the change of states
+    */
     nameChange = (e) => {
       this.setState ({
         name: e.target.value,
@@ -48,6 +51,9 @@ import { editWine } from '../components/userFunctions';
       })
     }
  
+    /* 
+      Function that manage the submition 
+    */
     sendOnSubmit(wine, id) {
       
       addWineDM(wine, id).then(res => {
@@ -162,7 +168,7 @@ import { editWine } from '../components/userFunctions';
             <h2>
             { this.state.name} 
 
-            {// Render add button
+            {// Render Send button
               this.props.send &&
                 <button 
                 className="add_button" 
@@ -172,7 +178,7 @@ import { editWine } from '../components/userFunctions';
                 </button>
             } 
 
-            {// Render edit button 
+            {// Render Edit button 
               this.props.edit &&
               <button 
               className="add_button" 
