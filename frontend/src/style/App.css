@@ -209,9 +209,9 @@ header h1 a {
 
 .search_form {
     float:left;
-    margin: 2% 1%;
-    width: 30%;
-    min-width: 600px;
+    margin: 2.8% 1%;
+    width: 28%;
+    min-width: 400px;
 }
 
 .search_box {
@@ -222,12 +222,17 @@ header h1 a {
     margin-right: 1%;
 }
 
-.select_options {
-    height: 30px;
-    border: solid 1px #a41e27;
-    border-radius: 10px;
-    box-shadow: 1px 2px 6px #a41e27;
-    margin-right: 2%;
+#grid, #square {
+    float: left;
+    margin: 2.5% 2%;
+    padding: 5px;
+    border: 2px solid #000000;
+    border-radius: 15px;
+}
+
+#grid:hover, #square:hover {
+    border: solid 2px black;
+    box-shadow: 1px 1px 6px black;
 }
 
 .option_button_submit {
@@ -238,21 +243,6 @@ header h1 a {
     box-shadow: 1px 1px 6px black;
     font-size: 1em;
     padding: 1.5%;
-}
-
-.sort {
-    display: block;
-    float: left;
-    margin: 2% 1%;
-    width: 15%;
-}
-
-.sort .sort_title {
-    float: left;
-}
-.sort .select_options {
-    float: left;
-    margin: 3% 2% 2% 3%;
 }
 
 .add_wine_button {
@@ -309,8 +299,27 @@ header h1 a {
     width: 90%;
     margin: 0 auto;
   }
+
+#left_arrow {
+    float: left;
+    margin: 300px 200px 300px 150px;
+    border: 2px solid #000000;
+    border-radius: 30px;
+}
+
+#right_arrow {
+    float: left;
+    margin: 300px 200px;
+    border: 2px solid #000000;
+    border-radius: 30px;
+}
+
+#left_arrow:hover, #right_arrow:hover {
+    border: inset 2px black;
+    box-shadow: 1px 1px 6px #a41e27;
+}
   
-  .card {
+.card {
     width: 25%;
     min-width: 380px;
     float: left;
@@ -323,9 +332,9 @@ header h1 a {
     box-shadow: 0 2px 0 #a41e27;
   }
 
-  .page_title {
-      font-size: 1.75em;
-      font-family: 'Philosopher', sans-serif;
+.page_title {
+    font-size: 1.75em;
+    font-family: 'Philosopher', sans-serif;
   }
 
 /* Css for mobile version */

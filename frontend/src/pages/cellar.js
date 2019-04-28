@@ -17,7 +17,8 @@ class Cellar extends Component {
       info: '', 
       add_component: false,
       share_component: false,
-      edit: false
+      edit: false, 
+      slideshow: true
     }
   }
 
@@ -53,6 +54,17 @@ class Cellar extends Component {
     }
   }
 
+  slideshow = (e) => {
+    var value;
+    if (this.state.slideshow === true) {
+      value = false;
+    }
+    else {
+      value = true;
+    }
+    this.setState({slideshow: value})
+  }
+
   /* 
     Function to reset states when the button of Cellar in the navigation bar is pressed.
   */
@@ -73,7 +85,8 @@ class Cellar extends Component {
   internalCellarOnSubmit() {
     this.setState ({
       add_component: false,
-      share_component: false
+      share_component: false,
+      slideshow: true
     });
 
     getWines(this.state.id).then(res => {
@@ -89,7 +102,8 @@ class Cellar extends Component {
   sharedOnSubmit() {
     this.setState ({
       add_component: false,
-      share_component: true
+      share_component: true,
+      slideshow: false
     });
 
     getWinesDM(this.state.id).then(res => {
@@ -119,7 +133,8 @@ class Cellar extends Component {
   masterOnSubmit = (e) => {
     this.setState ({
       add_component: true,
-      share_component: false
+      share_component: false, 
+      slideshow: false
     });
     
     getMasterWines(this.state.id).then(res => {
@@ -156,6 +171,16 @@ class Cellar extends Component {
           </button>
         </form>
 
+        {this.state.add_component === false && this.state.share_component === false &&
+            <Fragment>
+              {this.state.slideshow === true ? 
+                <img id="grid" src={require('../images/grid.png')} alt="Grid" width= "35px" height= "auto" onClick={e => this.slideshow(e)}/>
+              :
+                <img id="square" src={require('../images/square.png')} alt="Square" width= "35px" height= "auto" onClick={e => this.slideshow(e)}/>
+              }
+            </Fragment>
+         }
+
         {this.state.id !== 1 &&
         <Fragment>
           <button 
@@ -184,9 +209,9 @@ class Cellar extends Component {
         {console.log(this.state)}
 
         {this.state.wines.length === 0 ?
-            <p className="empty_cellar">The Cellar is empty.</p>
+            <p className="empty_cellar">There is nothing here.</p>
             : 
-            <WineList wines={this.state.wines} send={this.state.add_component} share={this.state.share_component} id={this.state.id} edit={this.state.edit} master={e => this.masterOnSubmit(e)} shared={e => this.sharedOnSubmit(e)}/>
+            <WineList wines={this.state.wines} send={this.state.add_component} share={this.state.share_component} slideshow={this.state.slideshow} id={this.state.id} edit={this.state.edit} cellar={e => this.internalCellarOnSubmit(e)} master={e => this.masterOnSubmit(e)} shared={e => this.sharedOnSubmit(e)}/>
         }
       </div>
     );
