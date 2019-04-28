@@ -218,6 +218,18 @@ import { editWine } from '../components/userFunctions';
   const WineList = (props) => {
     return (
       <div className="container">
+        {props.send === true &&
+          <h2 className="page_title">Master Cellar</h2>
+        }
+        {props.share === true &&
+          <h2 className="page_title">Shared with me</h2>
+        }
+        {props.send === false && props.share === false && props.id !== 1 &&
+          <h2 className="page_title">My Cellar</h2>
+        }
+        {props.send === false && props.share === false && props.id === 1 &&
+          <h2 className="page_title">Master User Cellar</h2>
+        }
         {props.wines.map( wine => 
           <Wine
             {...wine}

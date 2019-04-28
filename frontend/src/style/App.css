@@ -1,7 +1,9 @@
 /* Css of the general app */
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Philosopher');
 
 .app {
-    font-family: Helvetica, sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1.20em;
 }
 
 header {
@@ -11,6 +13,7 @@ header {
 }
 
 header h1 {
+    font-family: 'Philosopher', sans-serif;
     float: left;
     width: 60%;
     margin-left: 1%;
@@ -20,7 +23,7 @@ header h1 {
 header h1 a {
     text-decoration: none; 
     color: #a41e27;
-    font-size: 2em;
+    font-size: 1.8em;
 }
 
 .nav_header {
@@ -74,7 +77,7 @@ header h1 a {
 
 .welcome p {
     text-align: center;
-    font-size: 1.5em;
+    font-size: 1.3em;
 }
 
 .home_button_link {
@@ -318,6 +321,11 @@ header h1 a {
     border-bottom: 1px solid #a41e27;
     border-radius: 20px;
     box-shadow: 0 2px 0 #a41e27;
+  }
+
+  .page_title {
+      font-size: 1.75em;
+      font-family: 'Philosopher', sans-serif;
   }
 
 /* Css for mobile version */
