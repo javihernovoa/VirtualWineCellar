@@ -348,7 +348,7 @@ header h1 a {
 
     border-top: 2px solid #a41e27;
     border-radius: 10px;
-    margin-bottom: -89px;
+    margin-bottom: -175px;
 }
 
 .form_input_friend .form_input {
@@ -362,11 +362,25 @@ header h1 a {
 }
 
 .popup {
-    position: fixed;
+    position: relative;
     display: inline-block;
     cursor: pointer;
-    margin-top: -180px;
-    margin-left: -210px;
+    margin-top: 80px;
+    margin-left: 85px;
+}
+
+.popup_l {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.popup_r {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    margin-top: 20px;
 }
 
 .popup .popuptext {
@@ -382,9 +396,10 @@ header h1 a {
   bottom: 125%;
   left: 50%;
   margin-left: -80px;
+  font-size: .7em;
 }
 
-.popup .show {
+.popup .show, .popup_l .show, .popup_r .show  {
   visibility: visible;
   -webkit-animation: fadeIn 1s;
   animation: fadeIn 1s

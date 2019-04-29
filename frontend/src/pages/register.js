@@ -15,6 +15,7 @@ class Register extends Component {
       password: '',
       confirm_password: '',
       send_info: false,
+      message: ''
     }
   }
 
@@ -45,6 +46,11 @@ class Register extends Component {
     })
   }
 
+  popshow() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+  }
+
   /* 
     Function that manage the submition 
   */
@@ -67,11 +73,17 @@ class Register extends Component {
         })
       }
       else {
-        //Show that password and confirm password are not equals
+        this.setState({
+          message: "Passwords are not equal."
+        })
+        this.popshow();
       }
     }
     else {
-      //Show that password doesnt have 8 characters or more
+      this.setState({
+        message: "Password must have at least 8 characters."
+      })
+      this.popshow();
     }
   }
 
@@ -126,6 +138,10 @@ class Register extends Component {
           </button>
           
         </form> 
+
+        <div className="popup_r">
+          <span className="popuptext" id="myPopup">{this.state.message}</span>
+        </div> 
 
         <div className="connect_account">
           <p>Do you have an account?</p>

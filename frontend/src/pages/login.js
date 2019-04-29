@@ -12,7 +12,8 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
-      send_info: false
+      send_info: false,
+      message: ''
     }
   }
   /* 
@@ -28,6 +29,11 @@ class Login extends Component {
     this.setState ({
       password: e.target.value,
     })
+  }
+
+  popshow() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
   }
 
   /* 
@@ -49,7 +55,10 @@ class Login extends Component {
         this.props.history.push('/cellar')
       }
       else {
-        // Show in screen an error message 
+        this.setState({
+          message: res["error"]
+        })
+        this.popshow();
       }
     })
   }
@@ -88,7 +97,11 @@ class Login extends Component {
             Login
           </button>
           
-        </form> 
+        </form>
+
+        <div className="popup_l">
+          <span className="popuptext" id="myPopup">{this.state.message}</span>
+        </div> 
 
         <div className="connect_account">
           <p>Do you need an account?</p>

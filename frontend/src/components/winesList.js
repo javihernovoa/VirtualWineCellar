@@ -110,8 +110,8 @@ import { editWine } from '../components/userFunctions';
             message: res['result']
           })
         }
+        this.popshow();
       })
-      this.popshow();
     }
 
     edit() {
@@ -244,10 +244,11 @@ import { editWine } from '../components/userFunctions';
                     type="button"
                     onClick={e => this.shareOnSubmit(this.state.friend_username, this.state.id)}>
                     Send!
-                    <div className="popup">
-                      <span className="popuptext" id="myPopup">{this.state.message}</span>
-                    </div>
                   </button>
+
+                  <div className="popup">
+                      <span className="popuptext" id="myPopup">{this.state.message}</span>
+                  </div>
                 </div>
               </Fragment>
             }
