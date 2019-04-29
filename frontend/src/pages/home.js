@@ -47,30 +47,19 @@ class Home extends Component {
             <p>Keep a record of your wines!</p>
 
             <p>Adding the wine to your collection is simple and easy. 
-              You just need to fill the blank spaces in the add section.</p>
+              You just need to find your wine in the Master Cellar and press the "Send to me" button.</p>
           </section>
 
           <section className="feature_a"> 
-
-            <h4>Edit</h4>
-
-            <p>Did your wine change any property? Edit it!</p>
-
-            <p>Editing is simple, fast and easy. You just need to modify
-              the specific property that changed.</p>
-          </section>
-
-          <section className="feature_b"> 
 
             <h4>Delete</h4>
 
             <p>It was a bad idea to add that wine? Delete it!</p>
 
-            <p>Deleting a wine is straight foward, just go to the wine
-              information and press the "X" button.</p>
+            <p>Deleting a wine is straight foward, just go to the Shared with me and press the "Remove" button.</p>
           </section>
 
-          <section className="feature_a"> 
+          <section className="feature_b"> 
 
             <h4>Share</h4>
 
