@@ -122,7 +122,7 @@ def adWineFriend():
             userWines.append(rows[2])
 
         if userWines.__contains__(wine):
-            result = jsonify({"result": "User already have that wine!"})
+            result = jsonify({"result": "The user already has that wine!"})
 
         else:
             #Get data from the database 
@@ -131,10 +131,10 @@ def adWineFriend():
             str(wine) + "')")
             
             conn.commit()
-            result = jsonify({"result": "Wine sended!"})
+            result = jsonify({"result": "Wine sent!"})
 
     else:
-        result = jsonify({"result" : "User doesn't exist"})
+        result = jsonify({"result" : "User doesn't exist."})
 
     return result
 
