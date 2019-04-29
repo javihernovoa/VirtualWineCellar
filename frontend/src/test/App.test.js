@@ -7,7 +7,7 @@ import Register from '../pages/register';
 import Home from '../pages/home';
 import Cellar from '../pages/cellar';
 
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });

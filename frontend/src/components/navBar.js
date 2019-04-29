@@ -11,16 +11,19 @@ class navBar extends Component {
   constructor(props){
     super(props)
     this.state = {
-      cellar : true
+      cellar : true,
+      logout: false
     }
   }
   /* 
     Function that manages the logout 
   */
   handleLogout = async (e) => {
-    e.preventDefault();
+    this.setState({
+      logout: true
+    })
     Auth.deauthenticateUser();
-    this.props.history.push('/')
+    this.props.history.push('/');
   }
 
   cellarChange = (e) => {
@@ -42,8 +45,8 @@ class navBar extends Component {
                 <p><Link to="/login" className="link" onClick={e => this.handleLogout(e)}>Logout</Link></p>
                 {this.state.cellar !== true &&
                   <Fragment>
-                    {this.state.cellar === true}
                     <p><Link to="/cellar" className="link" onClick={e => Cellar.cellarOnSubmit(e)}>Cellar</Link></p>
+                    {this.state.cellar === true}
                   </Fragment>
                 }
               </nav> 
