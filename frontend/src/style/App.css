@@ -366,17 +366,17 @@ header h1 a {
     display: inline-block;
     cursor: pointer;
     margin-top: -180px;
-    margin-left: -180px;
+    margin-left: -210px;
 }
 
 .popup .popuptext {
   visibility: hidden;
-  width: 160px;
-  background-color: #555;
-  color: #fff;
+  width: 200px;
+  background-color: #ffffff;
+  color: #000000;
   text-align: center;
-  border-radius: 6px;
-  padding: 8px 0;
+  border-radius: 8px;
+  padding: 8px;
   position: absolute;
   z-index: 1;
   bottom: 125%;

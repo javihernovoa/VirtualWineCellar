@@ -17,7 +17,7 @@ import { editWine } from '../components/userFunctions';
         country: this.props[3],
         grape: this.props[4],
         alcohol: this.props[5],
-        share_message: ''
+        message: ''
       }
     }
 
@@ -102,17 +102,16 @@ import { editWine } from '../components/userFunctions';
       addWineFriend(username, wine).then(res => {
         if(!res.error) {
           this.setState({
-            share_message: "Wine sended!",
+            message: res['result']
           })
-          this.popshow();
         }
         else {
           this.setState({
-            send_message: res.data,
+            message: res['result']
           })
-          this.popshow();
         }
       })
+      this.popshow();
     }
 
     edit() {
@@ -246,7 +245,7 @@ import { editWine } from '../components/userFunctions';
                     onClick={e => this.shareOnSubmit(this.state.friend_username, this.state.id)}>
                     Send!
                     <div className="popup">
-                      <span className="popuptext" id="myPopup">{this.state.share_message}</span>
+                      <span className="popuptext" id="myPopup">{this.state.message}</span>
                     </div>
                   </button>
                 </div>
@@ -303,7 +302,7 @@ import { editWine } from '../components/userFunctions';
       super(props)
 
       this.state = {
-        indexValue: 0
+        indexValue: 0,
       }
     }
 
