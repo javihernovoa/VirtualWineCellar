@@ -29,4 +29,10 @@ describe('<Home />', () => {
         expect(wrapper.find('.feature_b').exists()).toBe(true);
     });
 
+    it('Renders a link to Register Page', () => {
+        const wrapper = shallow(<Home />);
+
+        expect(wrapper.find('Link').prop('to')).toBe('/register');
+    });
+
 });
