@@ -362,9 +362,11 @@ header h1 a {
 }
 
 .popup {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
+    position: fixed;
+    display: inline-block;
+    cursor: pointer;
+    margin-top: -180px;
+    margin-left: -180px;
 }
 
 .popup .popuptext {

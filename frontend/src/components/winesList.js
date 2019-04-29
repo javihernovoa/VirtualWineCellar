@@ -17,10 +17,6 @@ import { editWine } from '../components/userFunctions';
         country: this.props[3],
         grape: this.props[4],
         alcohol: this.props[5],
-
-        send_message: '',
-        add_message: '',
-        remove_message: '',
         share_message: ''
       }
     }
@@ -76,16 +72,6 @@ import { editWine } from '../components/userFunctions';
       addWineDM(wine, id).then(res => {
         if(!res.error){
           this.props.master()
-          this.setState({
-            send_message: "Wine sent to your Shared with me!",
-          })
-          this.popshow();
-        }
-        else {
-          this.setState({
-            send_message: "Something went wrong!",
-          })
-          this.popshow();
         }
       })
     }
@@ -95,14 +81,6 @@ import { editWine } from '../components/userFunctions';
       addWineCellar(wine, id).then(res => {
         if(!res.error){
           this.props.shared()
-          this.setState({
-            add_message: "Wine added to your Cellar!",
-          })
-        }
-        else {
-          this.setState({
-            add_message: "Something went wrong!",
-          })
         }
       })
     }
@@ -112,14 +90,6 @@ import { editWine } from '../components/userFunctions';
       removeWineDM(wine, id).then(res => {
         if(!res.error){
           this.props.shared()
-          this.setState({
-            remove_message: "Wine removed!",
-          })
-        }
-        else {
-          this.setState({
-            remove_message: "Something went wrong!",
-          })
         }
       })
     }
@@ -134,11 +104,13 @@ import { editWine } from '../components/userFunctions';
           this.setState({
             share_message: "Wine sended!",
           })
+          this.popshow();
         }
         else {
           this.setState({
             send_message: res.data,
           })
+          this.popshow();
         }
       })
     }
@@ -241,9 +213,6 @@ import { editWine } from '../components/userFunctions';
                 type="button"
                 onClick={e => this.sendOnSubmit(this.state.id, this.props.id)}>
                 Send to me
-                <div className="popup">
-                  <span class="popuptext" id="myPopup">A Simple Popup!</span>
-                </div>
               </button>
             } 
 
@@ -276,6 +245,9 @@ import { editWine } from '../components/userFunctions';
                     type="button"
                     onClick={e => this.shareOnSubmit(this.state.friend_username, this.state.id)}>
                     Send!
+                    <div className="popup">
+                      <span className="popuptext" id="myPopup">{this.state.share_message}</span>
+                    </div>
                   </button>
                 </div>
               </Fragment>
