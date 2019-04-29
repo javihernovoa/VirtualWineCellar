@@ -11,12 +11,16 @@ app = Flask(__name__)
 
 #MySQL configurations
 app.config['MYSQL_DATABASE_USER'] = 'root'
-# app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'mysql'
 app.config['MYSQL_DATABASE_DB'] = 'virtual_wine_cellar'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-# app.config['MYSQL_DATABASE_PORT'] = 8889
 app.config['JWT_SECRET_KEY'] = 'secret'
+
+# MySQL different configuration for Mac  
+# app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
+# app.config['MYSQL_DATABASE_PORT'] = 8889
+
+# MySQL different configuration for MWindows 
+app.config['MYSQL_DATABASE_PASSWORD'] = 'mysql'
 
 mysql = MySQL()
 mysql.init_app(app)
@@ -25,6 +29,7 @@ jwt = JWTManager(app)
 
 CORS(app)
 
+# Register function 
 @app.route("/register", methods = ['POST'])
 def register():
 
@@ -32,12 +37,12 @@ def register():
     conn = mysql.connect()
     cursor = conn.cursor()
     
-    # read the posted values from the UI REST
+    # Read the posted values from the GUI
     username = request.get_json()['username']
     email = request.get_json()['email']
     password = bcrypt.generate_password_hash(request.get_json()['password']).decode('utf-8')
 
-    # Generate id 
+    # Generate id for database table
     cursor.execute("SELECT * from users")
 
     data = cursor.fetchall()
@@ -55,6 +60,7 @@ def register():
 
     return jsonify({'username': username})
 
+# Login function
 @app.route("/login", methods = ['POST'])
 def login():
 
@@ -62,14 +68,14 @@ def login():
     conn = mysql.connect()
     cursor = conn.cursor()
     
-    # read the posted values from the UI
+    # Read the posted values from the GUI
     username = request.get_json()['username']
     password = request.get_json()['password']
 
     # Result variable
     result = ""
 
-    #Get data from the database 
+    #Get data from database 
     cursor.execute("SELECT * FROM users where username = '" + str(username) + "'")
     data = cursor.fetchone()
 
@@ -88,6 +94,7 @@ def login():
 
     return result
 
+# Function that send wine to another user
 @app.route("/addWineFriend", methods = ['POST'])
 def adWineFriend():
 
@@ -95,14 +102,14 @@ def adWineFriend():
     conn = mysql.connect()
     cursor = conn.cursor()
     
-    # read the posted values from the UI
+    # Read the posted values from the GUI
     username = request.get_json()['username']
     wine = request.get_json()['wine']
 
     # Result variable
     result = ""
 
-    #Get data from the database 
+    #Get data from database 
     cursor.execute("SELECT * FROM users where username = '" + str(username) + "'")
     data = cursor.fetchone()
 
@@ -124,8 +131,7 @@ def adWineFriend():
         if userWines.__contains__(wine):
             result = jsonify({"result": "The user already has that wine!"})
 
-        else:
-            #Get data from the database 
+        else: 
             cursor.execute("INSERT INTO wineUserRelationDM (userID, wineID) VALUES ('" +
             str(id) + "', '" +
             str(wine) + "')")
@@ -138,6 +144,7 @@ def adWineFriend():
 
     return result
 
+# Function that gets the wines of the user
 @app.route("/getWines", methods = ['POST'])
 def getWines():
 
@@ -145,7 +152,7 @@ def getWines():
     conn = mysql.connect()
     cursor = conn.cursor()
     
-    # read the posted values from the UI
+    # read the posted values from the GUI
     id = request.get_json()['id']
     
     #Get data from the database 
@@ -164,6 +171,7 @@ def getWines():
 
     return json.dumps(wines)
 
+# Function that gets the wines from DM's user
 @app.route("/getWinesDM", methods = ['POST'])
 def getWinesDM():
 
@@ -171,7 +179,7 @@ def getWinesDM():
     conn = mysql.connect()
     cursor = conn.cursor()
     
-    # read the posted values from the UI
+    # read the posted values from the GUI
     id = request.get_json()['id']
 
     #Get data from the database 
@@ -190,6 +198,7 @@ def getWinesDM():
 
     return json.dumps(wines)
 
+# Function that gets the wines of the master user
 @app.route("/getMasterWines", methods = ['POST'])
 def getMasterWines():
 
@@ -197,7 +206,7 @@ def getMasterWines():
     conn = mysql.connect()
     cursor = conn.cursor()
     
-    # read the posted values from the UI
+    # read the posted values from the GUI
     id = request.get_json()['id']
     
     #Get data from the database 
@@ -230,6 +239,7 @@ def getMasterWines():
 
     return json.dumps(wines)
 
+# Function that add the wines in the DM's user
 @app.route("/addWineDM", methods = ['POST'])
 def addWineDM():
 
@@ -255,6 +265,7 @@ def addWineDM():
 
     return jsonify({'result': result})
 
+# Function that add the wines from DM to the Cellar 
 @app.route("/addWineCellar", methods = ['POST'])
 def addWineCellar():
 
@@ -283,6 +294,7 @@ def addWineCellar():
 
     return jsonify({'result': result})
 
+# Function that removes the wines from DM 
 @app.route("/removeWineDM", methods = ['POST'])
 def removeWineDM():
 
@@ -305,6 +317,7 @@ def removeWineDM():
 
     return jsonify({'result': result})
 
+# Function that edit the wines 
 @app.route("/editWine", methods = ['POST'])
 def editWine():
 
