@@ -60,6 +60,16 @@ import { editWine } from '../components/userFunctions';
       })
     }
 
+    shareToUser() {
+      if(this.state.userbox === true){
+        this.setState({userbox: false})
+      }
+      else {
+        this.setState({userbox: true})
+      }
+      
+    }
+
     popshow() {
       var popup = document.getElementById("myPopup");
       popup.classList.toggle("show");
@@ -92,10 +102,6 @@ import { editWine } from '../components/userFunctions';
           this.props.shared()
         }
       })
-    }
-
-    shareToUser() {
-      this.setState({userbox: true})
     }
 
     shareOnSubmit(username, wine) {
