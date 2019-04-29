@@ -98,13 +98,11 @@ import { editWine } from '../components/userFunctions';
           this.setState({
             add_message: "Wine added to your Cellar!",
           })
-          this.popshow();
         }
         else {
           this.setState({
             add_message: "Something went wrong!",
           })
-          this.popshow();
         }
       })
     }
@@ -117,13 +115,11 @@ import { editWine } from '../components/userFunctions';
           this.setState({
             remove_message: "Wine removed!",
           })
-          this.popshow();
         }
         else {
           this.setState({
             remove_message: "Something went wrong!",
           })
-          this.popshow();
         }
       })
     }
@@ -138,13 +134,11 @@ import { editWine } from '../components/userFunctions';
           this.setState({
             share_message: "Wine sended!",
           })
-          this.popshow();
         }
         else {
           this.setState({
             send_message: res.data,
           })
-          this.popshow();
         }
       })
     }
