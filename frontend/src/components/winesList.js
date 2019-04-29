@@ -16,7 +16,12 @@ import { editWine } from '../components/userFunctions';
         year: this.props[2],
         country: this.props[3],
         grape: this.props[4],
-        alcohol: this.props[5]
+        alcohol: this.props[5],
+
+        send_message: '',
+        add_message: '',
+        remove_message: '',
+        share_message: ''
       }
     }
 
@@ -58,18 +63,29 @@ import { editWine } from '../components/userFunctions';
         friend_username: e.target.value,
       })
     }
+
+    popshow() {
+      var popup = document.getElementById("myPopup");
+      popup.classList.toggle("show");
+    }
  
     /* 
       Function that manage the submition 
     */
     sendOnSubmit(wine, id) {
-      
       addWineDM(wine, id).then(res => {
         if(!res.error){
           this.props.master()
+          this.setState({
+            send_message: "Wine sent to your Shared with me!",
+          })
+          this.popshow();
         }
         else {
-          // Show in screen an error message 
+          this.setState({
+            send_message: "Something went wrong!",
+          })
+          this.popshow();
         }
       })
     }
@@ -79,9 +95,16 @@ import { editWine } from '../components/userFunctions';
       addWineCellar(wine, id).then(res => {
         if(!res.error){
           this.props.shared()
+          this.setState({
+            add_message: "Wine added to your Cellar!",
+          })
+          this.popshow();
         }
         else {
-          // Show in screen an error message 
+          this.setState({
+            add_message: "Something went wrong!",
+          })
+          this.popshow();
         }
       })
     }
@@ -91,9 +114,16 @@ import { editWine } from '../components/userFunctions';
       removeWineDM(wine, id).then(res => {
         if(!res.error){
           this.props.shared()
+          this.setState({
+            remove_message: "Wine removed!",
+          })
+          this.popshow();
         }
         else {
-          // Show in screen an error message 
+          this.setState({
+            remove_message: "Something went wrong!",
+          })
+          this.popshow();
         }
       })
     }
@@ -105,10 +135,16 @@ import { editWine } from '../components/userFunctions';
     shareOnSubmit(username, wine) {
       addWineFriend(username, wine).then(res => {
         if(!res.error) {
-          console.log(res)
+          this.setState({
+            share_message: "Wine sended!",
+          })
+          this.popshow();
         }
         else {
-          console.log(res)
+          this.setState({
+            send_message: res.data,
+          })
+          this.popshow();
         }
       })
     }
@@ -205,13 +241,19 @@ import { editWine } from '../components/userFunctions';
 
             {// Render Send button
               this.props.send &&
-                <button 
+              
+               <button 
                 className="add_button" 
                 type="button"
                 onClick={e => this.sendOnSubmit(this.state.id, this.props.id)}>
                 Send to me
-                </button>
+                <div className="popup">
+                  <span class="popuptext" id="myPopup">A Simple Popup!</span>
+                </div>
+              </button>
             } 
+
+            {console.log(this.state.sended)}
 
             {// Render Share To User Box
               this.props.slideshow &&

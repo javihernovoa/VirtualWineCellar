@@ -125,16 +125,8 @@ def adWineFriend():
             result = jsonify({"error": "Users already have that wine!"})
 
         else:
-            # Generate id 
-            cursor.execute("SELECT * from wineUserRelationDM")
-
-            data = cursor.fetchall()
-
-            id_table = len(data) + 1
-
             #Get data from the database 
-            cursor.execute("INSERT INTO wineUserRelationDM (id, userID, wineID) VALUES ('" +
-            str(id_table) + "', '" +
+            cursor.execute("INSERT INTO wineUserRelationDM (userID, wineID) VALUES ('" +
             str(id) + "', '" +
             str(wine) + "')")
             
@@ -249,16 +241,8 @@ def addWineDM():
     wine = request.get_json()['wine']
     id = request.get_json()['id']
 
-    # Generate id 
-    cursor.execute("SELECT * from wineUserRelationDM")
-
-    data = cursor.fetchall()
-
-    id_table = len(data) + 1
-
     #Get data from the database 
-    cursor.execute("INSERT INTO wineUserRelationDM (id, userID, wineID) VALUES ('" +
-    str(id_table) + "', '" +
+    cursor.execute("INSERT INTO wineUserRelationDM (userID, wineID) VALUES ('" +
     str(id) + "', '" +
     str(wine) + "')")
     
@@ -282,16 +266,8 @@ def addWineCellar():
     wine = request.get_json()['wine']
     id = request.get_json()['id']
 
-    # Generate id 
-    cursor.execute("SELECT * from wineUserRelation")
-
-    data = cursor.fetchall()
-
-    id_table = len(data) + 1
-
     #Get data from the database 
-    cursor.execute("INSERT INTO wineUserRelation (id, userID, wineID) VALUES ('" +
-    str(id_table) + "', '" +
+    cursor.execute("INSERT INTO wineUserRelation (userID, wineID) VALUES ('" +
     str(id) + "', '" +
     str(wine) + "')")
     
