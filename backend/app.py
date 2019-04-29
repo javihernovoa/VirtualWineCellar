@@ -79,7 +79,7 @@ def login():
     cursor.execute("SELECT * FROM users where username = '" + str(username) + "'")
     data = cursor.fetchone()
 
-    if bcrypt.check_password_hash(data[3], password):
+    if data != None and bcrypt.check_password_hash(data[3], password):
 
         access_token = create_access_token(identity = {
             'id': data[0],
@@ -317,7 +317,7 @@ def removeWineDM():
 
     return jsonify({'result': result})
 
-# Function that edit the wines 
+# Function that edit the wine
 @app.route("/editWine", methods = ['POST'])
 def editWine():
 

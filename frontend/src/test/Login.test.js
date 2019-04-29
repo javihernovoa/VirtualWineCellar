@@ -39,7 +39,12 @@ describe('<Login />', () => {
         expect(wrapper.find('p').text()).toBe("Do you need an account?");
     });
 
-    it('renders button link "Login in your account"', () => {
+    it('renders popup message', () => {
+        const wrapper = shallow(<Login />);
+        expect(wrapper.find('.popuptext').text()).toBe("");
+    });
+
+    it('renders button link "Login in your account', () => {
         const wrapper = shallow(<Login />);
         expect(wrapper.find('.button_link').text()).toBe("<Link />");
     });
@@ -50,11 +55,11 @@ describe('<Login />', () => {
     it('testing simulated values', () => {
         const wrapper = shallow(<Login />);
 
-        wrapper.find('input').at(0).simulate('change', {target: {value: 'Test'}});
-        wrapper.find('input').at(1).simulate('change', {target: {value: 'TestPassword'}});
+        wrapper.find('input').at(0).simulate('change', {target: {value: 'Tester'}});
+        wrapper.find('input').at(1).simulate('change', {target: {value: 'Tester1234'}});
 
-        expect(wrapper.state('username')).toBe('Test');
-        expect(wrapper.state('password')).toBe('TestPassword');
+        expect(wrapper.state('username')).toBe('Tester');
+        expect(wrapper.state('password')).toBe('Tester1234');
     });
     
     it('testing Login button', () => {
@@ -63,6 +68,7 @@ describe('<Login />', () => {
         wrapper.find('.button_submit').simulate('click');
 
         expect(wrapper.state('send_info')).toBe(true);
+        expect(wrapper.state('send_message')).toBe("Sended");
     });
 
     it('testing Login in your account button', () => {

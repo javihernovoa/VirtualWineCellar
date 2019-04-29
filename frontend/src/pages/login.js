@@ -12,8 +12,12 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
+      message: '',
+
+
+      //Test variables 
       send_info: false,
-      message: ''
+      send_message: ''
     }
   }
   /* 
@@ -46,21 +50,29 @@ class Login extends Component {
       password: this.state.password
     }
 
+    // Test variables
     this.setState({
-      send_info: true
+      send_info: true,
+      send_message: "Sended"
     })
 
-    login(user).then(res => {
-      if(!res.error) {
-        this.props.history.push('/cellar')
-      }
-      else {
-        this.setState({
-          message: res["error"]
-        })
-        this.popshow();
-      }
-    })
+    if(this.state.username.length > 0 && this.state.password.length > 0) {
+      login(user).then(res => {
+        if(!res.error) {
+          this.props.history.push('/cellar')
+        }
+        else {
+          this.setState({
+            message: res["error"]
+          })
+        }
+      })
+    }
+    else {
+      this.setState({
+        message: "Invalid username or password"
+      })
+    }
   }
 
   render() {

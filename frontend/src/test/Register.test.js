@@ -44,6 +44,11 @@ describe('<Register />', () => {
         expect(wrapper.find('.button_submit').length).toBe(1);
     });
 
+    it('renders popup message', () => {
+        const wrapper = shallow(<Register />);
+        expect(wrapper.find('.popuptext').text()).toBe("");
+    });
+
     it('renders message about account', () => {
         const wrapper = shallow(<Register />);
         expect(wrapper.find('p').text()).toBe("Do you have an account?");
@@ -77,6 +82,7 @@ describe('<Register />', () => {
         wrapper.find('.button_submit').simulate('click');
 
         expect(wrapper.state('send_info')).toBe(true);
+        expect(wrapper.state('send_message')).toBe("Sended");
     });
 
     it('testing Login in your account button', () => {

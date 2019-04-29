@@ -14,8 +14,11 @@ class Register extends Component {
       email: '',
       password: '',
       confirm_password: '',
-      send_info: false,
-      message: ''
+      message: '',
+
+       //Test variables 
+       send_info: false,
+       send_message: ''
     }
   }
 
@@ -55,8 +58,11 @@ class Register extends Component {
     Function that manage the submition 
   */
   onSubmit = (e) => {
-    this.setState ({
+    
+    // Test variables
+    this.setState({
       send_info: true,
+      send_message: "Sended"
     })
 
     if(this.state.password.length >= 8) {
@@ -76,14 +82,12 @@ class Register extends Component {
         this.setState({
           message: "Passwords are not equal."
         })
-        this.popshow();
       }
     }
     else {
       this.setState({
         message: "Password must have at least 8 characters."
       })
-      this.popshow();
     }
   }
 
