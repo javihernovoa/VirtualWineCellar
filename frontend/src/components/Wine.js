@@ -1,3 +1,4 @@
+//Test purpose only
 import React, { Component, Fragment } from 'react';
 import { addWineDM, addWineCellar, removeWineDM, addWineFriend } from './userFunctions';
 import { editWine } from './userFunctions';
@@ -17,7 +18,10 @@ import { editWine } from './userFunctions';
         country: this.props[3],
         grape: this.props[4],
         alcohol: this.props[5],
-        message: ''
+        message: '',
+
+        //Test variable
+        test: false
       }
     }
 
@@ -79,6 +83,8 @@ import { editWine } from './userFunctions';
       Function that manage the submition 
     */
     sendOnSubmit(wine, id) {
+      this.setState({test: true});
+
       addWineDM(wine, id).then(res => {
         if(!res.error){
           this.props.master()
@@ -87,6 +93,7 @@ import { editWine } from './userFunctions';
     }
 
     addOnSubmit(wine, id) {
+      this.setState({test: true});
       
       addWineCellar(wine, id).then(res => {
         if(!res.error){
@@ -96,6 +103,7 @@ import { editWine } from './userFunctions';
     }
 
     removeOnSubmit(wine, id) {
+      this.setState({test: true});
       
       removeWineDM(wine, id).then(res => {
         if(!res.error){
@@ -105,6 +113,7 @@ import { editWine } from './userFunctions';
     }
 
     shareOnSubmit(username, wine) {
+      this.setState({test: true});
       addWineFriend(username, wine).then(res => {
         if(!res.error) {
           this.setState({
@@ -125,6 +134,8 @@ import { editWine } from './userFunctions';
     }
 
     editOnSubmit = (e) => {
+      this.setState({edit: false});
+
       const newWine = {
         id: this.state.id,
         name: this.state.name,
@@ -136,7 +147,6 @@ import { editWine } from './userFunctions';
 
       editWine(newWine).then(res => {
         this.setState({
-          edit: false,
           name: res.result.name,
           year: res.result.year,
           country: res.result.country,
