@@ -69,6 +69,19 @@ export const getMasterWines = id => {
         })
 }
 
+// export const getSearchedFor = term => {
+//     return axios
+//         .post('http://127.0.0.1:5000/getMasterWines', {
+//             id: id
+//         })
+//         .then(response => {
+//             return response.data
+//         })
+//         .catch(err => {
+//             console.log(err)
+//         })
+// }
+
 export const addWineFriend = (username, wine) => {
     return axios
         .post('http://127.0.0.1:5000/addWineFriend', {

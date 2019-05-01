@@ -6,6 +6,7 @@ import jwt_decode from 'jwt-decode';
 import WineList from '../components/winesList';
 import { getWines, getWinesDM, getMasterWines } from '../components/userFunctions';
 
+
 class Cellar extends Component {
   constructor(props) {
     super(props)
@@ -14,6 +15,7 @@ class Cellar extends Component {
       username: '',
       email: '',
       wines: [],
+      filtered: [],
       info: '', 
       add_component: '',
       share_component: '',
@@ -59,6 +61,7 @@ class Cellar extends Component {
   }
 
   slideshow = (e) => {
+    
     var value;
     if (this.state.slideshow === true) {
       value = false;
@@ -76,6 +79,7 @@ class Cellar extends Component {
     getWines(this.state.id).then(res => {
       if(!res.error){
         this.setState({wines: res})
+        this.searchOnSubmit()
       }
       else {
         // Show in screen an error message 
@@ -96,6 +100,7 @@ class Cellar extends Component {
     getWines(this.state.id).then(res => {
       if(!res.error){
         this.setState({wines: res})
+        this.searchOnSubmit()
       }
       else {
         // Show in screen an error message 
@@ -115,6 +120,7 @@ class Cellar extends Component {
         this.setState({
           wines: res
         })
+        this.searchOnSubmit()
       }
       else {
         // Show in screen an error message 
@@ -123,15 +129,85 @@ class Cellar extends Component {
   }
 
   searchInfoChange = (e) => {
-    this.setState ({
-      info: e.target.value,
-    })
-  }
+    // Variable to hold the original version of the list
+    let currentList = [];
+    // Variable to hold the filtered list before putting into state
+    let newList = [];
+
+    // If the search bar isn't empty
+    if (e.target.value !== "") {
+            // Assign the original list to currentList
+      currentList = this.state.wines;
+            // Use .filter() to determine which items should be displayed
+            // based on the search terms
+      newList = currentList.filter(item => {
+        // change items to lowercase
+        const name = item[1].toLowerCase();
+        const year = item[2];
+        const country = item[3].toLowerCase();
+        const grape = item[4].toLowerCase();
+        const alcohol = item[5];
+
+        // change search term to lowercase
+        const filter = e.target.value.toLowerCase();
+        // check to see if the current list item includes the search term
+        // If it does, it will be added to newList. Using lowercase eliminates
+        // issues with capitalization in search terms and search content 
+
+        return (name.includes(filter) || year.toString().includes(filter) 
+        || country.includes(filter) || grape.includes(filter) || alcohol.toString().includes(filter));
+      });
+
+    } else {
+            // If the search bar is empty, set newList to original task list
+      newList = this.state.wines;
+    }
+        // Set the filtered state based on what our rules added to newList
+    this.setState({
+      filtered: newList,
+      info: e.target.value
+    });
+}
+
 
   searchOnSubmit = (e) => {
-    // Search funtion 
-    console.log(this.state)
-
+         // Variable to hold the original version of the list
+         let currentList = [];
+         // Variable to hold the filtered list before putting into state
+         let newList = [];
+     
+         // If the search bar isn't empty
+         if (this.state.info !== "") {
+                 // Assign the original list to currentList
+           currentList = this.state.wines;
+                 // Use .filter() to determine which items should be displayed
+                 // based on the search terms
+           newList = currentList.filter(item => {
+             // change items to lowercase
+             const name = item[1].toLowerCase();
+             const year = item[2];
+             const country = item[3].toLowerCase();
+             const grape = item[4].toLowerCase();
+             const alcohol = item[5];
+     
+             // change search term to lowercase
+             const filter = this.state.info.toLowerCase();
+             // check to see if the current list item includes the search term
+             // If it does, it will be added to newList. Using lowercase eliminates
+             // issues with capitalization in search terms and search content 
+     
+             return (name.includes(filter) || year.toString().includes(filter) 
+             || country.includes(filter) || grape.includes(filter) || alcohol.toString().includes(filter));
+           });
+     
+         } else {
+                 // If the search bar is empty, set newList to original task list
+           newList = this.state.wines;
+         }
+             // Set the filtered state based on what our rules added to newList
+         this.setState({
+           filtered: newList,
+         });
   }
 
   masterOnSubmit = (e) => {
@@ -146,6 +222,7 @@ class Cellar extends Component {
         this.setState({
           wines: res
         })
+        this.searchOnSubmit()
       }
       else {
         // Show in screen an error message 
@@ -210,12 +287,10 @@ class Cellar extends Component {
         </Fragment>
         }
 
-        {console.log(this.state)}
-
-        {this.state.wines.length === 0 ?
+        {this.state.filtered.length === 0 ?
             <p className="empty_cellar">There is nothing here.</p>
             : 
-            <WineList wines={this.state.wines} send={this.state.add_component} share={this.state.share_component} slideshow={this.state.slideshow} id={this.state.id} edit={this.state.edit} cellar={e => this.internalCellarOnSubmit(e)} master={e => this.masterOnSubmit(e)} shared={e => this.sharedOnSubmit(e)}/>
+            <WineList wines={this.state.filtered} send={this.state.add_component} share={this.state.share_component} slideshow={this.state.slideshow} id={this.state.id} edit={this.state.edit} cellar={e => this.internalCellarOnSubmit(e)} master={e => this.masterOnSubmit(e)} shared={e => this.sharedOnSubmit(e)}/>
         }
       </div>
     );
