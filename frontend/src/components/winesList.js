@@ -215,8 +215,6 @@ import { editWine } from '../components/userFunctions';
               </button>
             } 
 
-            {console.log(this.state.sended)}
-
             {// Render Share To User Box
               this.props.slideshow &&
               <button 
@@ -304,6 +302,7 @@ import { editWine } from '../components/userFunctions';
 
       this.state = {
         indexValue: 0,
+        wine: '' 
       }
     }
 
@@ -315,10 +314,22 @@ import { editWine } from '../components/userFunctions';
       else if (newValue < 0) {
         newValue = this.props.wines.length - 1;
       }
-      this.setState({indexValue: newValue});
+      this.setState({
+        indexValue: newValue,
+        wine: this.props.wines[newValue]
+      });
     }
 
     render() {
+      var mainWine = this.state.wine !== '' ? // verifica si wine esta vacio 
+        this.props.searchChange === false ?  // verifica si hubo cambio en el search
+          this.state.wine // si el wine no esta vacio y no hubo cambio, wine se mantiene
+          :
+          this.props.wines[0] // si el wine no esta vacio per si hubo cambio en search, resetea wine al primer vino
+                              // Aqui surge el problema, siempre carga el primer vino pero no resetea la variable searchChange a false para permitir 
+                              // el uso de las flechas para los demas vinos. 
+        : 
+        this.props.wines[0]; // si wine esta vacio, carga el primer vino 
       return (
         <div className="container">
           {this.props.send === true &&
@@ -336,10 +347,12 @@ import { editWine } from '../components/userFunctions';
   
           {this.props.slideshow === true ? 
             <Fragment>
+              {console.log(this.props.wines)}
+              {console.log(this.state.indexValue)}
               <img id="left_arrow" src={require('../images/left.png')} alt="Left Arrow" width= "auto" height= "auto" onClick={e => this.slideshowFunction(-1)}/>
               <Wine
-                  {...this.props.wines[this.state.indexValue]}
-                  key={this.state.indexValue}
+                  {...mainWine}
+                  key={mainWine[0]}
                   send={this.props.send}
                   share={this.props.share} 
                   id={this.props.id}

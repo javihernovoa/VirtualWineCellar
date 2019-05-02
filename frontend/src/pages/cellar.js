@@ -20,7 +20,8 @@ class Cellar extends Component {
       add_component: '',
       share_component: '',
       edit: '', 
-      slideshow: ''
+      slideshow: '',
+      search_change: false //variable que determina si hay cambio en el search
     }
   }
 
@@ -39,7 +40,10 @@ class Cellar extends Component {
       
     getWines(decoded.identity.id).then(res => {
       if(!res.error){
-        this.setState({wines: res})
+        this.setState({
+          wines: res,
+          filtered: res
+        })
       }
       else {
         // Show in screen an error message 
@@ -60,6 +64,10 @@ class Cellar extends Component {
     }
   }
 
+  searchOnChange() {
+    this.setState({search_change: false})
+  }
+
   slideshow = (e) => {
     
     var value;
@@ -78,7 +86,10 @@ class Cellar extends Component {
   static cellarOnSubmit() {
     getWines(this.state.id).then(res => {
       if(!res.error){
-        this.setState({wines: res})
+        this.setState({
+          wines: res, 
+          filtered: res
+        })
         this.searchOnSubmit()
       }
       else {
@@ -165,7 +176,8 @@ class Cellar extends Component {
         // Set the filtered state based on what our rules added to newList
     this.setState({
       filtered: newList,
-      info: e.target.value
+      info: e.target.value,
+      search_change: true //variable que determina si hay cambio en el search
     });
 }
 
@@ -290,7 +302,18 @@ class Cellar extends Component {
         {this.state.filtered.length === 0 ?
             <p className="empty_cellar">There is nothing here.</p>
             : 
-            <WineList wines={this.state.filtered} send={this.state.add_component} share={this.state.share_component} slideshow={this.state.slideshow} id={this.state.id} edit={this.state.edit} cellar={e => this.internalCellarOnSubmit(e)} master={e => this.masterOnSubmit(e)} shared={e => this.sharedOnSubmit(e)}/>
+            <WineList 
+            wines={this.state.filtered} 
+            send={this.state.add_component} 
+            share={this.state.share_component} 
+            slideshow={this.state.slideshow} 
+            id={this.state.id} 
+            edit={this.state.edit} 
+            searchChange={this.state.search_change} //variable que determina si hay cambio en el search
+            search={e => this.searchOnChange(e)}
+            cellar={e => this.internalCellarOnSubmit(e)} 
+            master={e => this.masterOnSubmit(e)} 
+            shared={e => this.sharedOnSubmit(e)}/>
         }
       </div>
     );
