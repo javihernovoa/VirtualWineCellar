@@ -318,6 +318,9 @@ import { editWine } from '../components/userFunctions';
         indexValue: newValue,
         wine: this.props.wines[newValue]
       });
+      if(this.props.searchChange === true) {
+        this.props.search(); // Creo que esto arreglo el problema> Hay que probarlo bien con diferentes vinos. 
+      }
     }
 
     render() {
