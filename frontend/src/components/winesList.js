@@ -328,7 +328,7 @@ import { editWine } from '../components/userFunctions';
         this.props.searchChange === false ?  // verifica si hubo cambio en el search
           this.state.wine // si el wine no esta vacio y no hubo cambio, wine se mantiene
           :
-          this.props.wines[0] // si el wine no esta vacio per si hubo cambio en search, resetea wine al primer vino
+          this.props.wines[this.state.indexValue] // si el wine no esta vacio per si hubo cambio en search, resetea wine al primer vino
                               // Aqui surge el problema, siempre carga el primer vino pero no resetea la variable searchChange a false para permitir 
                               // el uso de las flechas para los demas vinos. 
         : 

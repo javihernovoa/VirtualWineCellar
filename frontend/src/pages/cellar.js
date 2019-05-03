@@ -20,8 +20,7 @@ class Cellar extends Component {
       add_component: '',
       share_component: '',
       edit: '', 
-      slideshow: '',
-      search_change: false //variable que determina si hay cambio en el search
+      slideshow: ''
     }
   }
 
@@ -40,10 +39,8 @@ class Cellar extends Component {
       
     getWines(decoded.identity.id).then(res => {
       if(!res.error){
-        this.setState({
-          wines: res,
-          filtered: res
-        })
+        this.setState({wines: res})
+        this.searchOnSubmit()
       }
       else {
         // Show in screen an error message 
@@ -64,20 +61,9 @@ class Cellar extends Component {
     }
   }
 
-  searchOnChange() {
-    this.setState({search_change: false})
-  }
-
   slideshow = (e) => {
     
-    var value;
-    if (this.state.slideshow === true) {
-      value = false;
-    }
-    else {
-      value = true;
-    }
-    this.setState({slideshow: value})
+    this.setState({slideshow: !this.state.slideshow})
   }
 
   /* 
@@ -86,10 +72,7 @@ class Cellar extends Component {
   static cellarOnSubmit() {
     getWines(this.state.id).then(res => {
       if(!res.error){
-        this.setState({
-          wines: res, 
-          filtered: res
-        })
+        this.setState({wines: res})
         this.searchOnSubmit()
       }
       else {
@@ -176,8 +159,7 @@ class Cellar extends Component {
         // Set the filtered state based on what our rules added to newList
     this.setState({
       filtered: newList,
-      info: e.target.value,
-      search_change: true //variable que determina si hay cambio en el search
+      info: e.target.value
     });
 }
 
@@ -256,12 +238,6 @@ class Cellar extends Component {
                 size="50"
                 onChange={e => this.searchInfoChange(e)} 
                 value={this.state.info}/>
-            <button 
-            className="option_button_submit" 
-            type="button" 
-            onClick={e => this.searchOnSubmit(e)}>
-            Go!
-          </button>
         </form>
 
         {this.state.add_component === false && this.state.share_component === false &&
@@ -302,18 +278,7 @@ class Cellar extends Component {
         {this.state.filtered.length === 0 ?
             <p className="empty_cellar">There is nothing here.</p>
             : 
-            <WineList 
-            wines={this.state.filtered} 
-            send={this.state.add_component} 
-            share={this.state.share_component} 
-            slideshow={this.state.slideshow} 
-            id={this.state.id} 
-            edit={this.state.edit} 
-            searchChange={this.state.search_change} //variable que determina si hay cambio en el search
-            search={e => this.searchOnChange(e)}
-            cellar={e => this.internalCellarOnSubmit(e)} 
-            master={e => this.masterOnSubmit(e)} 
-            shared={e => this.sharedOnSubmit(e)}/>
+            <WineList wines={this.state.filtered} send={this.state.add_component} share={this.state.share_component} slideshow={this.state.slideshow} id={this.state.id} edit={this.state.edit} cellar={e => this.internalCellarOnSubmit(e)} master={e => this.masterOnSubmit(e)} shared={e => this.sharedOnSubmit(e)}/>
         }
       </div>
     );
