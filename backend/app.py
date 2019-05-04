@@ -19,7 +19,7 @@ app.config['JWT_SECRET_KEY'] = 'secret'
 # app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
 # app.config['MYSQL_DATABASE_PORT'] = 8889
 
-# MySQL different configuration for MWindows 
+# MySQL different configuration for Windows 
 app.config['MYSQL_DATABASE_PASSWORD'] = 'mysql'
 
 mysql = MySQL()

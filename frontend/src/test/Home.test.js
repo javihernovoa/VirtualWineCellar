@@ -29,7 +29,7 @@ describe('<Home />', () => {
         expect(wrapper.find('.feature_b').exists()).toBe(true);
     });
 
-    it('Renders a link to Register Page', () => {
+    it('Renders a link to Register Page when user is unregistered', () => {
         const wrapper = shallow(<Home />);
 
         expect(wrapper.find('Link').prop('to')).toBe('/register');

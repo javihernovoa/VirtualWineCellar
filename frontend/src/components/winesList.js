@@ -1,8 +1,11 @@
+/* 
+  Contains the wineList and Wine class. 
+*/
 import React, { Component, Fragment } from 'react';
 import { addWineDM, addWineCellar, removeWineDM, addWineFriend } from '../components/userFunctions';
 import { editWine } from '../components/userFunctions';
 
-  // Create a 'Wine' component that renders a wine card
+// Class that renders the wine card.
   class Wine extends Component {
     constructor(props) {
       super(props)
@@ -22,7 +25,7 @@ import { editWine } from '../components/userFunctions';
     }
 
     /* 
-      Function that manage the change of states
+      Functions that manage the change of states.
     */
     nameChange = (e) => {
       this.setState ({
@@ -60,13 +63,24 @@ import { editWine } from '../components/userFunctions';
       })
     }
 
+    shareToUser() {
+      this.setState({userbox: true})
+    }
+
+    edit() {
+      this.setState({edit: true})
+    }
+
+    /* 
+      Function that manages the success and error messages. 
+    */
     popshow() {
       var popup = document.getElementById("myPopup");
       popup.classList.toggle("show");
     }
  
     /* 
-      Function that manage the submition 
+      Functions that manage the submition. 
     */
     sendOnSubmit(wine, id) {
       addWineDM(wine, id).then(res => {
@@ -77,7 +91,6 @@ import { editWine } from '../components/userFunctions';
     }
 
     addOnSubmit(wine, id) {
-      
       addWineCellar(wine, id).then(res => {
         if(!res.error){
           this.props.shared()
@@ -86,16 +99,11 @@ import { editWine } from '../components/userFunctions';
     }
 
     removeOnSubmit(wine, id) {
-      
       removeWineDM(wine, id).then(res => {
         if(!res.error){
           this.props.shared()
         }
       })
-    }
-
-    shareToUser() {
-      this.setState({userbox: true})
     }
 
     shareOnSubmit(username, wine) {
@@ -112,10 +120,6 @@ import { editWine } from '../components/userFunctions';
         }
         this.popshow();
       })
-    }
-
-    edit() {
-      this.setState({edit: true})
     }
 
     editOnSubmit = (e) => {
@@ -293,9 +297,8 @@ import { editWine } from '../components/userFunctions';
       );
     }
   }
-  
-  // Create a container component that iterates over the wine array 
-  //    and renders a 'Wine' component for each object in the array 
+
+// Class that renders the array of wines.
   class WineList extends Component {
     constructor(props) {
       super(props)
@@ -306,6 +309,9 @@ import { editWine } from '../components/userFunctions';
       }
     }
 
+    /* 
+      Function that controls the backward and forward features.
+    */
     slideshowFunction = (indexValue, value) => {
       var newValue = indexValue + value;
       
@@ -323,17 +329,16 @@ import { editWine } from '../components/userFunctions';
     }
 
     render() {
-      var mainWine = this.state.wine !== '' ? // verifica si wine esta vacio 
-        this.props.searchChange === false ?  // verifica si hubo cambio en el search
-          this.state.wine // si el wine no esta vacio y no hubo cambio, wine se mantiene
+      var mainWine = this.state.wine !== '' ? 
+        this.props.searchChange === false ?
+          this.state.wine 
           :
-          this.props.wines[0] // si el wine no esta vacio pero si hubo cambio en search, pone el primer vino en wine
+          this.props.wines[0]
         : 
-        this.props.wines[0]; // si wine esta vacio, carga el primer vino en wine
+        this.props.wines[0];
 
-      var indexNewValue = this.props.searchChange === true ? 0 : this.state.indexValue; // Pone el valor de indexValue a 0 si hay cambio en search.
-                                                                                        // En caso de borrar vuelve a la posicion 0 y mantiene el orden de la lista.
-
+      var indexNewValue = this.props.searchChange === true ? 0 : this.state.indexValue; 
+      
       return (
         <div className="container">
           {this.props.send === true &&

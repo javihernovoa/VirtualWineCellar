@@ -34,7 +34,7 @@ describe('<App />', () => {
     expect(wrapper.find('Link').at(2).prop('to')).toBe('/register');
   });
 
-  it('Links to register from Home component', () => {
+  it('Links to register from Home page', () => {
     const wrapper = mount(<MemoryRouter><App /></MemoryRouter>);
     expect(wrapper.find('Link').at(3).prop('to')).toBe('/register');
   });

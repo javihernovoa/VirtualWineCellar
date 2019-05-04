@@ -1,3 +1,6 @@
+/* 
+  Class that renders a not found message. 
+*/
 import React, { Component } from 'react';
 
 class NotFound extends Component {

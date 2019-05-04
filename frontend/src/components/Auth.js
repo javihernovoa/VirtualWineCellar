@@ -1,3 +1,6 @@
+/* 
+  Class that manages the Authentication of an user. 
+*/
 class Auth {
 
     static authenticateUser(token) {

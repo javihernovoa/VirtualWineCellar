@@ -16,7 +16,7 @@ class navBar extends Component {
     }
   }
   /* 
-    Function that manages the logout 
+    Function that manages the logout.
   */
   handleLogout = async (e) => {
     this.setState({

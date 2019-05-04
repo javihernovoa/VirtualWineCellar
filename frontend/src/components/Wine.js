@@ -1,4 +1,4 @@
-//Test purpose only
+// Test purpose only
 import React, { Component, Fragment } from 'react';
 import { addWineDM, addWineCellar, removeWineDM, addWineFriend } from './userFunctions';
 import { editWine } from './userFunctions';

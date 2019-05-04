@@ -1,7 +1,8 @@
+/* 
+    Class that controls the connection between the backend and the frontend.
+*/
 import axios from 'axios';
 import Auth from './Auth';
-
-
 
 export const register = newUser => {
     return axios 
@@ -68,19 +69,6 @@ export const getMasterWines = id => {
             console.log(err)
         })
 }
-
-// export const getSearchedFor = term => {
-//     return axios
-//         .post('http://127.0.0.1:5000/getMasterWines', {
-//             id: id
-//         })
-//         .then(response => {
-//             return response.data
-//         })
-//         .catch(err => {
-//             console.log(err)
-//         })
-// }
 
 export const addWineFriend = (username, wine) => {
     return axios

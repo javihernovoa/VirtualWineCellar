@@ -23,7 +23,7 @@ class Register extends Component {
   }
 
   /* 
-    Function that manage the change of states
+    Functions that manage the change of states.
   */
   usernameChange = (e) => {
     this.setState ({
@@ -49,13 +49,16 @@ class Register extends Component {
     })
   }
 
+  /* 
+    Function that manages the error message. 
+  */
   popshow() {
     var popup = document.getElementById("myPopup");
     popup.classList.toggle("show");
   }
 
   /* 
-    Function that manage the submition 
+    Function that manages the submition. 
   */
   onSubmit = (e) => {
     

@@ -9,7 +9,7 @@ configure({ adapter: new Adapter() });
 
 describe('<Login />', () => {
     
-    it('renders Login', () => {
+    it('renders Login title', () => {
       const wrapper = shallow(<Login />);
       expect(wrapper.find('.title_form').text()).toBe("Login");
     });

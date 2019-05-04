@@ -25,6 +25,9 @@ class Cellar extends Component {
     }
   }
 
+  /* 
+    Function that executes before render.  
+  */
   componentDidMount() {
     const token = localStorage.usertoken
     const decoded = jwt_decode(token)
@@ -43,17 +46,11 @@ class Cellar extends Component {
         this.setState({wines: res})
         this.searchOnSubmit()
       }
-      else {
-        // Show in screen an error message 
-      }
     })
 
     getWinesDM(decoded.identity.id).then(res => {
       if(!res.error){
         this.setState({winesDM: res})
-      }
-      else {
-        // Show in screen an error message 
       }
     })
 
@@ -62,11 +59,17 @@ class Cellar extends Component {
     }
   }
 
+  /* 
+    Function that manages the switch between slideshow mode and list mode.
+  */
   slideshow = (e) => {
     
     this.setState({slideshow: !this.state.slideshow})
   }
 
+  /* 
+    Function that manages the change in the search box. 
+  */
   searchOnChange() {
     this.setState({search_value: false})
   }
@@ -80,14 +83,11 @@ class Cellar extends Component {
         this.setState({wines: res})
         this.searchOnSubmit()
       }
-      else {
-        // Show in screen an error message 
-      }
     })
   }
 
   /* 
-    Function that manage the submition 
+    Function that renders the wines of the user when the button "My Cellar" is pressed. 
   */
   internalCellarOnSubmit() {
     this.setState ({
@@ -104,6 +104,9 @@ class Cellar extends Component {
     })
   }
 
+  /* 
+    Function that renders the shared wines when the button "Shared with me" is pressed.
+  */
   sharedOnSubmit() {
     this.setState ({
       add_component: false,
@@ -118,12 +121,12 @@ class Cellar extends Component {
         })
         this.searchOnSubmit()
       }
-      else {
-        // Show in screen an error message 
-      }
     })
   }
 
+  /* 
+    Function that manages the info in the search box.
+  */
   searchInfoChange = (e) => {
     // Variable to hold the original version of the list
     let currentList = [];
@@ -166,7 +169,9 @@ class Cellar extends Component {
     });
 }
 
-
+  /* 
+    Function that manages the search on submition.
+  */
   searchOnSubmit = (e) => {
          // Variable to hold the original version of the list
          let currentList = [];
@@ -207,6 +212,9 @@ class Cellar extends Component {
          });
   }
 
+  /* 
+    Function that renders the Master User wines when the button "Master Cellar" is pressed. 
+  */
   masterOnSubmit = (e) => {
     this.setState ({
       add_component: true,
@@ -220,9 +228,6 @@ class Cellar extends Component {
           wines: res
         })
         this.searchOnSubmit()
-      }
-      else {
-        // Show in screen an error message 
       }
     })
   }
