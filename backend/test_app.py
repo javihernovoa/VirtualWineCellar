@@ -134,7 +134,7 @@ class AppTestCase(unittest.TestCase):
 
         def test_getMasterWines_success(self):
                 data = {
-                        'id': 2
+                        'id': 5
                 }
                 rv = self.app.post('/getMasterWines', json=data)
                 assert b'Undurraga' in rv.data

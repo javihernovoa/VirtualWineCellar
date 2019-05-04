@@ -306,8 +306,9 @@ import { editWine } from '../components/userFunctions';
       }
     }
 
-    slideshowFunction = (value) => {
-      var newValue = this.state.indexValue + value;
+    slideshowFunction = (indexValue, value) => {
+      var newValue = indexValue + value;
+      
       if(newValue > this.props.wines.length - 1) {
         newValue = 0;
       }
@@ -318,9 +319,7 @@ import { editWine } from '../components/userFunctions';
         indexValue: newValue,
         wine: this.props.wines[newValue]
       });
-      if(this.props.searchChange === true) {
-        this.props.search(); // Creo que esto arreglo el problema> Hay que probarlo bien con diferentes vinos. 
-      }
+      this.props.search();
     }
 
     render() {
@@ -328,11 +327,13 @@ import { editWine } from '../components/userFunctions';
         this.props.searchChange === false ?  // verifica si hubo cambio en el search
           this.state.wine // si el wine no esta vacio y no hubo cambio, wine se mantiene
           :
-          this.props.wines[this.state.indexValue] // si el wine no esta vacio per si hubo cambio en search, resetea wine al primer vino
-                              // Aqui surge el problema, siempre carga el primer vino pero no resetea la variable searchChange a false para permitir 
-                              // el uso de las flechas para los demas vinos. 
+          this.props.wines[0] // si el wine no esta vacio pero si hubo cambio en search, pone el primer vino en wine
         : 
-        this.props.wines[0]; // si wine esta vacio, carga el primer vino 
+        this.props.wines[0]; // si wine esta vacio, carga el primer vino en wine
+
+      var indexNewValue = this.props.searchChange === true ? 0 : this.state.indexValue; // Pone el valor de indexValue a 0 si hay cambio en search.
+                                                                                        // En caso de borrar vuelve a la posicion 0 y mantiene el orden de la lista.
+
       return (
         <div className="container">
           {this.props.send === true &&
@@ -350,9 +351,9 @@ import { editWine } from '../components/userFunctions';
   
           {this.props.slideshow === true ? 
             <Fragment>
-              {console.log(this.props.wines)}
               {console.log(this.state.indexValue)}
-              <img id="left_arrow" src={require('../images/left.png')} alt="Left Arrow" width= "auto" height= "auto" onClick={e => this.slideshowFunction(-1)}/>
+              {console.log(this.props.searchChange)}
+              <img id="left_arrow" src={require('../images/left.png')} alt="Left Arrow" width= "auto" height= "auto" onClick={e => this.slideshowFunction(indexNewValue, -1)}/>
               <Wine
                   {...mainWine}
                   key={mainWine[0]}
@@ -364,7 +365,7 @@ import { editWine } from '../components/userFunctions';
                   shared={this.props.shared}
                   slideshow={this.props.slideshow}
                 /> 
-                <img id="right_arrow" src={require('../images/right.png')} alt="Right Arrow" width= "auto" height= "auto" onClick={e => this.slideshowFunction(1)}/> 
+                <img id="right_arrow" src={require('../images/right.png')} alt="Right Arrow" width= "auto" height= "auto" onClick={e => this.slideshowFunction(indexNewValue, 1)}/> 
             </Fragment>
           :
             <Fragment>
