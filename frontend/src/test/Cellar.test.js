@@ -20,4 +20,35 @@ describe('<Cellar />', () => {
         const wrapper = shallow(<Cellar />);
         expect(wrapper.find('.welcome_user').text()).toBe("Welcome back, Ale!");
     });
+
+    it('testing searched values', () => {
+        const wrapper = shallow(<Cellar />);
+        wrapper.find('input').at(0).simulate('change', {target: {value: 'cabernet'}});
+        expect(wrapper.state('info')).toBe('cabernet');
+        
+        const wines = [
+            {id: 1,
+            name: "Undurraga",
+            year: 2016,
+            country: "Argentina",
+            grape: "Cabernet",
+            alcohol: 13,
+            link: "undurraga.jpg"}
+        ]
+
+        wrapper.setState({wines: wines});
+        expect(wrapper.state('wines').grape.toBe("Cabernet Sauvignon"));
+        
+    });
+
+    it('changes view mode (slideshow)', () => {
+        const wrapper = shallow(<Cellar />);
+        if ( wrapper.state('add_component').toBe(false) && wrapper.state('share_component').toBe(false) ){
+        wrapper.find('img').at(0).simulate('change', {target: {value: false}});
+        expect(wrapper.state('slideshow')).toBe(false);
+        }else{
+            expect(wrapper.state('slideshow')).toBe(false);
+        }
+    });
+    
 });
