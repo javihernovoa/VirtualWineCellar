@@ -23,6 +23,7 @@ export const login = user => {
             password: user.password
         })
         .then(response => {
+            console.log(response.data)
             Auth.authenticateUser(response.data)
             return response.data
         })

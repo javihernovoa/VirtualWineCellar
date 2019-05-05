@@ -36,21 +36,14 @@ describe('<NavBar />', () => {
 describe('<NavBar />', () => {
 
     it('renders Logout button', () => {
-        Auth.authenticateUser({
-            'id': 100,
-            'username': "Tester",
-            'email': "tester@gmail.com"
-        })
+        Auth.authenticateUser('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTcwNzAxODEsIm5iZiI6MTU1NzA3MDE4MSwianRpIjoiMWQzZDg0NDItMmE3My00YWY3LTg0MjEtZTMyNjEyYTk4NDkzIiwiZXhwIjoxNTU3MDcxMDgxLCJpZGVudGl0eSI6eyJpZCI6MiwidXNlcm5hbWUiOiJBbGUiLCJlbWFpbCI6ImFtYXRvczU3M0BnbWFpbC5jb20ifSwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.Xmx4CDLIJauaFA9F-eTM3B-PRYpZBajbgtth0-uSoe8');
+
         const wrapper = mount(<MemoryRouter><NavBar /></MemoryRouter>);
         expect(wrapper.find('Link').at(1).prop('to')).toBe('/login');
     });
 
     it('testing Logout button', () => {
-        Auth.authenticateUser({
-            'id': 100,
-            'username': "Tester",
-            'email': "tester@gmail.com"
-        })
+        Auth.authenticateUser('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTcwNzAxODEsIm5iZiI6MTU1NzA3MDE4MSwianRpIjoiMWQzZDg0NDItMmE3My00YWY3LTg0MjEtZTMyNjEyYTk4NDkzIiwiZXhwIjoxNTU3MDcxMDgxLCJpZGVudGl0eSI6eyJpZCI6MiwidXNlcm5hbWUiOiJBbGUiLCJlbWFpbCI6ImFtYXRvczU3M0BnbWFpbC5jb20ifSwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.Xmx4CDLIJauaFA9F-eTM3B-PRYpZBajbgtth0-uSoe8');
 
         const wrapper = mount(<MemoryRouter><NavBar /></MemoryRouter>);
 

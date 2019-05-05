@@ -356,8 +356,6 @@ import { editWine } from '../components/userFunctions';
   
           {this.props.slideshow === true ? 
             <Fragment>
-              {console.log(this.state.indexValue)}
-              {console.log(this.props.searchChange)}
               <img id="left_arrow" src={require('../images/left.png')} alt="Left Arrow" width= "auto" height= "auto" onClick={e => this.slideshowFunction(indexNewValue, -1)}/>
               <Wine
                   {...mainWine}
