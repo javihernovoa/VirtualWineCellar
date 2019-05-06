@@ -231,8 +231,6 @@ import { editWine } from './userFunctions';
               </button>
             } 
 
-            {console.log(this.state.sended)}
-
             {// Render Share To User Box
               this.props.slideshow &&
               <button 
