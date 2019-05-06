@@ -1,4 +1,5 @@
 import React from 'react';
+import Enzyme from 'enzyme';
 import { shallow } from 'enzyme';
 import Cellar from '../pages/cellar';
 import Auth from '../components/Auth';
@@ -23,21 +24,54 @@ describe('<Cellar />', () => {
 
     it('testing searched values', () => {
         const wrapper = shallow(<Cellar />);
+        const wines = [
+            {
+                0: 1,
+                1: "Undurraga",
+                2: 2016,
+                3: "Argentina",
+                4: "Cabernet Sauvignon",
+                5: 13,
+                6: "undurraga.jpg"
+            },
+            {   
+                0: 2,
+                1: "Undurraga",
+                2: 2017,
+                3: "Argentina",
+                4: "Cabernet Sauvignon",
+                5: 13,
+                6: "undurraga.jpg"
+            },
+            {   
+                0: 3,
+                1: "Campo Viejo",
+                2: 2012,
+                3: "España",
+                4: "Tempranillo",
+                5: 12,
+                6: "undurraga.jpg"
+            }
+
+        ];
+
+        wrapper.setState({wines: wines});
         wrapper.find('input').at(0).simulate('change', {target: {value: 'cabernet'}});
         expect(wrapper.state('info')).toBe('cabernet');
         
-        const wines = [
-            {id: 1,
-            name: "Undurraga",
-            year: 2016,
-            country: "Argentina",
-            grape: "Cabernet Sauvignon",
-            alcohol: 13,
-            link: "undurraga.jpg"}
-        ]
+        expect(wrapper.state('filtered').length).toBe(2);
 
-        wrapper.setState({wines: wines});
-        expect(wrapper.state('wines')[0].grape).toBe("Cabernet Sauvignon");        
+        // for (wine in wrapper.state('filtered')){
+        var wine;
+        var type;
+
+        for (var i = 0; i < wrapper.state('filtered').length; i++){
+            wine = wrapper.state('filtered')[i];
+            type = wine[4]
+            expect(type).toBe('Cabernet Sauvignon'); 
+            expect(type.toLowerCase()).toContain('cabernet'); 
+        }
+       
     });
 
     it('changes view mode (slideshow)', () => {
@@ -46,7 +80,7 @@ describe('<Cellar />', () => {
         wrapper.find('img').at(0).simulate('change', {target: {value: false}});
         expect(wrapper.state('slideshow')).toBe(false);
         }else{
-            expect(wrapper.state('slideshow')).toBe(false);
+            expect(wrapper.state('slideshow')).toBe(true);
         }
     });
     

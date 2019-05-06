@@ -287,6 +287,7 @@ class Cellar extends Component {
             <p className="empty_cellar">There is nothing here.</p>
             : 
             <WineList 
+            
             wines={this.state.filtered} 
             send={this.state.add_component} 
             share={this.state.share_component} 
